@@ -15,6 +15,9 @@ int game_timer;     // タイマー
 
 // 別のファイルの変数を使用する宣言
 extern int nextScene;
+extern void bg_init();
+extern void bg_update();
+extern void bg_draw();
 
 //--------------------------------
 // 初期設定

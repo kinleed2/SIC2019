@@ -34,6 +34,10 @@ void game_common()
     {
         nextScene = SCENE_TITLE;
     }
+
+
+
+	player_update();
 }
 
 //--------------------------------
@@ -49,6 +53,9 @@ void game_update()
         // スプライトのロード
         //sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 
+
+		player_init();
+
         GameLib::setBlendMode(Blender::BS_ALPHA);
 
         game_state++;
@@ -61,6 +68,9 @@ void game_update()
         break;
     }
     game_timer++;
+
+
+	debug::setString("game_timer:%d", game_timer);
 }
 
 //--------------------------------
@@ -70,6 +80,8 @@ void game_draw()
 {
     // 画面を白で塗りつぶす
     GameLib::clear(1, 1, 1);
+
+	player_draw();
 }
 
 //--------------------------------

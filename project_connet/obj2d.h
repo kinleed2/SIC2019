@@ -44,7 +44,7 @@ struct OBJ2D
     BOOL    hostilityFg;    // 敵フラグ（今回から追加）
 
     // 特殊なもの
-    BOOL    grndFg;         // 地上フラグ（地上のものはTRUE）
+    BOOL    groundFlag;     // 地上フラグ（地上のものはTRUE）
     float   rotate;         // 旋回する角度
     OBJ2D*  parent;         // 親オブジェクトを指すポインタ
     VECTOR2 rpos;           // 相対的な位置（relative position)

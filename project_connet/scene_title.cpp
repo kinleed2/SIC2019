@@ -88,7 +88,7 @@ void title_draw()
     // タイトル画面のフェードアウト
     if (fadeOut > 0.0f)
     {
-        primitive::rect(0, 0, system::SCREEN_WIDTH, system::SCREEN_HEIGHT, 
+        primitive::rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 
             0, 0, 0, 0, 0, 0, fadeOut);
     }
 }
@@ -98,4 +98,6 @@ void title_draw()
 //--------------------------------
 void title_end()
 {
+
+
 }

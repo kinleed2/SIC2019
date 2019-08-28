@@ -8,10 +8,10 @@ extern int lineState;
 
 void judge_update()
 {
+
 	if (lineState == 2 && player.pos.x == 768 && player.pos.y == 576)
 	{
 		game_state = 2;
 	}
-
 
 }

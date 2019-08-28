@@ -17,6 +17,8 @@
 
 //------< íËêî >----------------------------------------------------------------
 #define VEC4_WHITE      (VECTOR4(1, 1, 1, 1))   // îí
+#define SCREEN_HEIGHT (960)
+#define SCREEN_WIDTH  (1280)
 
 // ÉVÅ[Éìä«óùópíËêî
 #define SCENE_TITLE     (0)

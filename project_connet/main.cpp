@@ -20,8 +20,8 @@ int nextScene;
 int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
 {
     // ゲームライブラリの初期設定
-    GameLib::init(L"ゲームプログラミングⅠ　制作用ひな型", 
-        (int)system::SCREEN_WIDTH, (int)system::SCREEN_HEIGHT, FALSE);
+    GameLib::init(L"Project Connect", 
+        SCREEN_WIDTH, SCREEN_HEIGHT, FALSE);
 
     // ブレンドモードの設定
     GameLib::setBlendMode(Blender::BS_ALPHA);
@@ -90,7 +90,7 @@ int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
 
         // デバッグ文字列の描画
         debug::display(1, 0, 0, 1, 1);
-        debug::setString("GP1_PROTO_TYPE");
+        //debug::setString("GP1_PROTO_TYPE");
 
         // バックバッファの内容を表示
         GameLib::present(1, 0);

@@ -1,7 +1,6 @@
-﻿  bg.cpp
-c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(66): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(70): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(74): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(77): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+﻿  scene_game.cpp
 Debug\bg.obj : warning LNK4042: オブジェクトの指定が重複しています。余分なものは無視されます。
-  gp1.vcxproj -> C:\Users\2190412\Desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\Debug\gp1.exe
+scene_game.obj : error LNK2019: 未解決の外部シンボル "void __cdecl bg_init(void)" (?bg_init@@YAXXZ) が関数 "void __cdecl game_update(void)" (?game_update@@YAXXZ) で参照されました。
+scene_game.obj : error LNK2019: 未解決の外部シンボル "void __cdecl bg_update(void)" (?bg_update@@YAXXZ) が関数 "void __cdecl game_common(void)" (?game_common@@YAXXZ) で参照されました。
+scene_game.obj : error LNK2019: 未解決の外部シンボル "void __cdecl bg_draw(void)" (?bg_draw@@YAXXZ) が関数 "void __cdecl game_draw(void)" (?game_draw@@YAXXZ) で参照されました。
+D:\SIC2019\SIC2019\proto\Debug\gp1.exe : fatal error LNK1120: 3 件の未解決の外部参照

@@ -162,7 +162,9 @@
     <ClCompile Include="GameLib\texture.cpp" />
     <ClCompile Include="GameLib\vector.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="obj2d.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="scene_game.cpp" />
     <ClCompile Include="scene_title.cpp" />
   </ItemGroup>
@@ -187,7 +189,9 @@
     <ClInclude Include="GameLib\texture.h" />
     <ClInclude Include="GameLib\util.h" />
     <ClInclude Include="GameLib\vector.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="obj2d.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="scene_game.h" />
     <ClInclude Include="scene_title.h" />
   </ItemGroup>

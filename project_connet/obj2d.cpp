@@ -41,9 +41,9 @@ OBJ2D* searchSet(OBJ2D arr[], int arrayNum, int type, VECTOR2 pos)
 BOOL areaCheck(OBJ2D* obj, float limit)
 {
     if (obj->pos.x < -limit ||
-        obj->pos.x > system::SCREEN_WIDTH + limit ||
+        obj->pos.x > SCREEN_WIDTH + limit ||
         obj->pos.y < -limit ||
-        obj->pos.y > system::SCREEN_HEIGHT + limit)
+        obj->pos.y > SCREEN_HEIGHT + limit)
     {
         obj->exist = FALSE;
     }
