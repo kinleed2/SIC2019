@@ -1,0 +1,7 @@
+﻿  bg.cpp
+c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(66): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(70): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(74): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\2190412\desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\bg.cpp(77): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+Debug\bg.obj : warning LNK4042: オブジェクトの指定が重複しています。余分なものは無視されます。
+  gp1.vcxproj -> C:\Users\2190412\Desktop\ゲームプログラミング\制作用ひな型\gp1 制作用ひな型\Debug\gp1.exe
