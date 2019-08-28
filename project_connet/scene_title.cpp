@@ -78,8 +78,8 @@ void title_draw()
     GameLib::clear(0, 0, 0);
 
     // 文字表示機能
-    font::textOut(2, "ECC COMP", 50, 100, 2, 2, 1, 1, 0);
-    font::textOut(2, "Shooting Game", 40, 250, 1.3f, 1.3f, 0, 1, 1);
+    //font::textOut(2, "ECC COMP", 50, 100, 2, 2, 1, 1, 0);
+    font::textOut(2, "Project Connect", 40, 250, 1.3f, 1.3f, 0, 1, 1);
 
     // 文字を点滅させる
     if (title_timer / 32 % 2)
