@@ -35,7 +35,7 @@ void game_common()
         nextScene = SCENE_TITLE;
     }
 
-
+	map_update();
 
 	player_update();
 }
@@ -53,6 +53,7 @@ void game_update()
         // スプライトのロード
         //sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 
+		map_init();
 
 		player_init();
 
@@ -80,6 +81,8 @@ void game_draw()
 {
     // 画面を白で塗りつぶす
     GameLib::clear(1, 1, 1);
+
+	map_draw();
 
 	player_draw();
 }
