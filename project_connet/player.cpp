@@ -8,8 +8,8 @@ void player_init()
 {
 	player.pos.x = 0;
 	player.pos.y = 0;
-
-
+	player.direction = right;
+	player.connectFlag = FALSE;
 }
 
 void player_update()
@@ -17,35 +17,31 @@ void player_update()
 	//右に移動する
 	if (STATE(0) & PAD_RIGHT)
 	{
+		player.direction = right;
 		if (player.speed.x < 10 && game_timer % 2 == 0)
 		{
 			player.speed.x++;
 		}
 	}
 	//滑る
-	else if (player.speed.x > 0)
+	else if (player.speed.x > 0 && game_timer % 3 == 0)
 	{
-		if (game_timer % 4 == 0)
-		{
-			player.speed.x--;
-		}
+		player.speed.x--;
 		
 	}
 	//左に移動する
 	if (STATE(0) & PAD_LEFT)
 	{
+		player.direction = left;
 		if (player.speed.x > -10 && game_timer % 2 == 0)
 		{
 			player.speed.x--;
 		}
 	}
 	//滑る
-	else if (player.speed.x < 0)
+	else if (player.speed.x < 0 && game_timer % 3 == 0)
 	{
-		if (game_timer % 4 == 0)
-		{
-			player.speed.x++;
-		}
+		player.speed.x++;
 	}
 	player.pos.x += player.speed.x;
 	
@@ -53,7 +49,7 @@ void player_update()
 
 
 	//落下
-	int checkGround = 0;
+	player.groundFlag = 0;
 	int i, j;
 	for (i = 0; i < 24; i++)
 	{
@@ -62,52 +58,82 @@ void player_update()
 			if (map[i][j].type == 1 
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE 
 				&& player.pos.x >= map[i][j].pos.x 
-				&& player.pos.y + MAPCHIP_SIZE * 2 == map[i][j].pos.y)
+				&& player.pos.y + PL_HEIGHT == map[i][j].pos.y)
 			{
-				checkGround = 1;
+				player.groundFlag = TRUE;
 			}
 		}
 	}
-	if (checkGround == 0)
+	if (player.groundFlag == FALSE)
 	{
 		player.pos.y += 40;
 	}
 
-	//右に飛ぶ
 
-	float checkFlyRposX = player.pos.x + 4 * MAPCHIP_SIZE;
-	float checkFlyRposY = player.pos.y - 4 * MAPCHIP_SIZE;
-	int checkFlyRflag = 0;
+	//飛ぶ
+	player.hookFlag = FALSE;
+	switch (player.direction)
+	{
+	case right:
+		player.hookPos.x = player.pos.x + 4 * MAPCHIP_SIZE;
+		break;
+	case left:
+		player.hookPos.x = player.pos.x - 4 * MAPCHIP_SIZE;
+		break;
+	default:
+		break;
+	}
+
+	player.hookPos.y = player.pos.y - PL_HEIGHT;
 
 	for (i = 0; i < 24; i++)
 	{
 		for (j = 0; j < 32; j++)
 		{
 		if (map[i][j].type == 1
-			&& checkFlyRposY == map[i][j].pos.y
-			&& checkFlyRposX >= map[i][j].pos.x 
-			&& checkFlyRposX <= map[i][j].pos.x + MAPCHIP_SIZE)
+			&& player.hookPos.y == map[i][j].pos.y
+			&& player.hookPos.x >= map[i][j].pos.x
+			&& player.hookPos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
-				checkFlyRflag = 1;
-				checkFlyRposX == map[i][j].pos.x;
-				checkFlyRposY == map[i][j].pos.y;
+				player.hookFlag = TRUE;
+				player.hookPos.x = map[i][j].pos.x;
+				player.hookPos.y = map[i][j].pos.y;
 				
 			}
 		}
 	}
-	if (checkFlyRflag)
+	if (player.hookFlag)
 	{
 		if (TRG(0)& PAD_TRG1)
 		{
-			player.pos.x = checkFlyRposX;
-			player.pos.y = checkFlyRposY - 3 * MAPCHIP_SIZE;
+			player.pos.x = player.hookPos.x;
+			player.pos.y = player.hookPos.y - PL_HEIGHT;
+
 		}
 	}
 
-	if (checkFlyRflag == 1)
+	//連結
+	for (i = 0; i < 24; i++)
 	{
-		primitive::circle(checkFlyRposX, checkFlyRposY, 20, 0, 1, 0);
+		for (j = 0; j < 32; j++)
+		{
+			if (map[i][j].type == 2
+				&& map[i][j].connectFlag == FALSE
+				&& player.pos.y + MAPCHIP_SIZE == map[i][j].pos.y
+				&& player.pos.x >= map[i][j].pos.x - MAPCHIP_SIZE
+				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
+			{
+				if (TRG(0)&PAD_TRG2)
+				{
+					map[i][j].connectFlag = TRUE;
+					player.cnt++;
+				}
+	
+
+			}
+		}
 	}
+	
 
 	// 自機の移動制限
 	if (player.pos.x < 0)                    player.pos.x = 0;
@@ -116,8 +142,7 @@ void player_update()
 	if (player.pos.y > SCREEN_HEIGHT - PL_HEIGHT -  MAPCHIP_SIZE)   player.pos.y = SCREEN_HEIGHT - PL_HEIGHT -  MAPCHIP_SIZE;
 
 
-	debug::setString("check:%d", checkFlyRflag);
-	debug::setString("checkY:%f", checkFlyRposY);
+
 	debug::setString("map y:%f", map[16][13].pos.y);
 	debug::setString("map type:%d", map[16][13].type);
 }
@@ -128,6 +153,15 @@ void player_draw()
 
 	primitive::rect(player.pos.x, player.pos.y,80,120,0,0,0,1,0,0);
 	
+	if (player.hookFlag)
+	{
+		primitive::circle(player.hookPos.x, player.hookPos.y + 20, 20, 0, 1, 0);
+	}
+
+
+
+
+
 	//debug
 	debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 }

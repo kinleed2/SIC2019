@@ -27,6 +27,8 @@ using namespace input;      // –{—ˆƒwƒbƒ_‚É‘‚­‚×‚«‚Å‚Í‚È‚¢iŠwK‚µ‚â‚·‚³‚ğ—Dæ
 #include "scene_game.h"
 #include "player.h"
 #include "map.h"
+#include "check.h"
+#include "enemy.h"
 
 //******************************************************************************
 #endif // !INCLUDED_ALL

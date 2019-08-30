@@ -37,7 +37,11 @@ void game_common()
 
 	map_update();
 
+	enemy_update();
+
 	player_update();
+
+	check();
 }
 
 //--------------------------------
@@ -55,6 +59,8 @@ void game_update()
 
 		map_init();
 
+		enemy_init();
+
 		player_init();
 
         GameLib::setBlendMode(Blender::BS_ALPHA);
@@ -67,6 +73,13 @@ void game_update()
         game_common();
 
         break;
+
+
+	case 2:
+
+		
+
+		break;
     }
     game_timer++;
 
@@ -80,11 +93,15 @@ void game_update()
 void game_draw()
 {
     // ‰æ–Ê‚ð”’‚Å“h‚è‚Â‚Ô‚·
-    GameLib::clear(1, 1, 1);
+    GameLib::clear(0, 0, 0);
 
 	map_draw();
 
+	enemy_draw();
+
 	player_draw();
+
+	
 }
 
 //--------------------------------

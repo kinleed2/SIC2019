@@ -1,4 +1,1 @@
-﻿  player.cpp
-d:\sic2019\sic2019\project_connet\player.cpp(92): warning C4553: '==': 演算子にプログラム上の作用がありません。'=' を意図しましたか?
-d:\sic2019\sic2019\project_connet\player.cpp(93): warning C4553: '==': 演算子にプログラム上の作用がありません。'=' を意図しましたか?
-  gp1.vcxproj -> D:\SIC2019\SIC2019\project_connet\Debug\gp1.exe
+﻿  gp1.vcxproj -> D:\SIC2019\SIC2019\project_connet\Debug\gp1.exe

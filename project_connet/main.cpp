@@ -88,6 +88,7 @@ int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
             break;
         }
 
+
         // デバッグ文字列の描画
         debug::display(1, 0, 0, 1, 1);
         //debug::setString("GP1_PROTO_TYPE");

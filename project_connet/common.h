@@ -24,4 +24,10 @@
 #define SCENE_TITLE     (0)
 #define SCENE_GAME      (1)
 
+//
+enum DIRECTION
+{
+	right, left
+};
+
 #endif// ! INCLUDED_COMMON

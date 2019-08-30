@@ -42,6 +42,8 @@ struct OBJ2D
     VECTOR2 speed;          // 速度
     int     cnt;            // 汎用カウンタ（使い方は自由）
     BOOL    hostilityFg;    // 敵フラグ（今回から追加）
+	int		direction;		// 方向
+
 
     // 特殊なもの
     BOOL    groundFlag;     // 地上フラグ（地上のものはTRUE）
@@ -52,6 +54,9 @@ struct OBJ2D
     int     atk;            // 攻撃力
     int     damageTimer;    // ダメージタイマー
     int     score;          // この敵を倒したら何点入るか
+	VECTOR2 hookPos;		//
+	BOOL	hookFlag;		//
+	BOOL    connectFlag;    //
 };
 
 //------< プロトタイプ宣言 >-----------------------------------------------------
