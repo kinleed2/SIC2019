@@ -10,6 +10,8 @@ void player_init()
 	player.pos.y = 0;
 	player.direction = right;
 	player.connectFlag = FALSE;
+	player.cnt = 0;
+	player.hp = 1;
 }
 
 void player_update()
@@ -18,34 +20,43 @@ void player_update()
 	if (STATE(0) & PAD_RIGHT)
 	{
 		player.direction = right;
-		if (player.speed.x < 10 && game_timer % 2 == 0)
-		{
-			player.speed.x++;
-		}
+		player.pos.x += 5;
+		//if (player.speed.x < 10 && game_timer % 2 == 0)
+		//{
+		//	player.speed.x++;
+		//}
 	}
 	//ŠŠ‚é
-	else if (player.speed.x > 0 && game_timer % 3 == 0)
-	{
-		player.speed.x--;
-		
-	}
+	//else if (player.speed.x > 0 && game_timer % 3 == 0)
+	//{
+	//	player.speed.x--;
+	//	
+	//}
 	//¶‚ÉˆÚ“®‚·‚é
 	if (STATE(0) & PAD_LEFT)
 	{
 		player.direction = left;
-		if (player.speed.x > -10 && game_timer % 2 == 0)
-		{
-			player.speed.x--;
-		}
+		player.pos.x -= 5;
+		//if (player.speed.x > -10 && game_timer % 2 == 0)
+		//{
+		//	player.speed.x--;
+		//}
+		
 	}
 	//ŠŠ‚é
-	else if (player.speed.x < 0 && game_timer % 3 == 0)
+	//else if (player.speed.x < 0 && game_timer % 3 == 0)
+	//{
+	//	player.speed.x++;
+	//}
+
+	//player.pos.x += player.speed.x;
+	
+	if (STATE(0) & PAD_UP)
 	{
-		player.speed.x++;
+		player.direction = up;
+
 	}
-	player.pos.x += player.speed.x;
-	
-	
+
 
 
 	//—Ž‰º
@@ -79,6 +90,9 @@ void player_update()
 		break;
 	case left:
 		player.hookPos.x = player.pos.x - 4 * MAPCHIP_SIZE;
+		break;
+	case up:
+		player.hookPos.x = player.pos.x + 60;
 		break;
 	default:
 		break;
@@ -118,9 +132,9 @@ void player_update()
 		for (j = 0; j < 32; j++)
 		{
 			if (map[i][j].type == 2
-				&& map[i][j].connectFlag == FALSE
+				//&& map[i][j].connectFlag == FALSE
 				&& player.pos.y + MAPCHIP_SIZE == map[i][j].pos.y
-				&& player.pos.x >= map[i][j].pos.x - MAPCHIP_SIZE
+				&& player.pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
 				if (TRG(0)&PAD_TRG2)
@@ -143,8 +157,8 @@ void player_update()
 
 
 
-	debug::setString("map y:%f", map[16][13].pos.y);
-	debug::setString("map type:%d", map[16][13].type);
+	
+
 }
 
 
@@ -163,6 +177,9 @@ void player_draw()
 
 
 	//debug
+	debug::setString("player.hp:%d", player.hp);
+	debug::setString("player.score:%d", player.score);
+	debug::setString("player.cnt:%d", player.cnt);
 	debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 }
 

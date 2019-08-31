@@ -15,7 +15,7 @@
 void enemy_init();
 void enemy_update();
 void enemy_draw();
-void enemy_0_move();
+void enemy_0_move(int leftLimit,int rightLimit);
 
 
 #endif // !INCLUDED_ENEMY

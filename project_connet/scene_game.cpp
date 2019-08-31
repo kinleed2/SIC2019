@@ -72,11 +72,13 @@ void game_update()
         //////// �ʏ펞 ////////
         game_common();
 
+
+
         break;
 
 
 	case 2:
-
+		
 		
 
 		break;

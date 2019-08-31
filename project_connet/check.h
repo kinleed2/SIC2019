@@ -13,7 +13,8 @@
 
 
 //------< プロトタイプ宣言 >-----------------------------------------------------
-int  check_conncet(int mapType);
+int  check_conncet();
 void check();
+void check_enemy_0();
 
 #endif // !INCLUDED_CHECK

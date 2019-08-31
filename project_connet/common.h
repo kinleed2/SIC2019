@@ -27,7 +27,7 @@
 //
 enum DIRECTION
 {
-	right, left
+	right, left ,up
 };
 
 #endif// ! INCLUDED_COMMON
