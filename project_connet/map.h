@@ -14,7 +14,7 @@
 
 //------< プロトタイプ宣言 >-----------------------------------------------------
 void map_init();
-void map_update();
+void map_update(int stage[24][32]);
 void map_draw();
 
 #endif // !INCLUDED_MAP

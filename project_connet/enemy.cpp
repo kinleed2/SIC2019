@@ -6,49 +6,62 @@ extern int game_timer;
 void enemy_init()
 {
 
-	enemy[0].pos.x = 690;
-	enemy[0].pos.y = 800;
-	enemy[0].state = 0;
+	int i;
+	for (i = 0; i < 3; i++)
+	{
+		if (enemy[i].exist == TRUE)
+		{
+			enemy[i].exist = FALSE;
+		}
+
+	}
 }
 
 void enemy_update()
 {
-	enemy_0_move(300,700);
+	//enemy_guard_move(300,700,1);
 }
 
 
 void enemy_draw()
 {
-	primitive::rect(enemy[0].pos.x, enemy[0].pos.y, 80, 120, 0, 0, 0, 1, 0, 1);
-	if (enemy[0].direction == right)
+	int i;
+	for ( i = 0; i < 3; i++)
 	{
-		primitive::rect(enemy[0].pos.x, enemy[0].pos.y, 80 + 100, 120, 0, 0, 0, 1, 0, 1,0.5);
+		if (enemy[i].exist == TRUE)
+		{
+			primitive::rect(enemy[i].pos.x, enemy[i].pos.y, 80, 120, 0, 0, 0, 1, 0, 1);
+			if (enemy[i].direction == right)
+			{
+				primitive::rect(enemy[i].pos.x, enemy[i].pos.y, 80 + 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
+			}
+			else
+			{
+				primitive::rect(enemy[i].pos.x - 100, enemy[i].pos.y, 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
+			}
+		}
 	}
-	else
-	{
-		primitive::rect(enemy[0].pos.x -100, enemy[0].pos.y, 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
-	}
+	
 
 }
 
-void enemy_0_move(int leftLimit, int rightLimit)
+void enemy_guard_move(OBJ2D *obj,int leftLimit, int rightLimit,int speed)
 {
-	switch (enemy[0].state)
+
+	switch (obj->direction)
 	{
-	case 0:
-		enemy[0].direction = left;
-		enemy[0].pos.x -= 1;
-		if (enemy[0].pos.x <= leftLimit)
+	case left:
+		obj->pos.x -= speed;
+		if (obj->pos.x <= leftLimit)
 		{
-			enemy[0].state++;
+			obj->direction = right;
 		}
 		break;
-	case 1:
-		enemy[0].direction = right;
-		enemy[0].pos.x += 1;
-		if (enemy[0].pos.x >= rightLimit)
+	case right:
+		obj->pos.x += speed;
+		if (obj->pos.x >= rightLimit)
 		{
-			enemy[0].state--;
+			obj->direction = left;
 		}
 		break;
 	default:
@@ -56,4 +69,13 @@ void enemy_0_move(int leftLimit, int rightLimit)
 	}
 
 
+}
+
+
+void enemy_guard_init(OBJ2D *obj,int x,int y,int direction)
+{
+	obj->pos.x = x;
+	obj->pos.y = y;
+	obj->direction = direction;
+	obj->exist = TRUE;
 }

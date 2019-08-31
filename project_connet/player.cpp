@@ -11,6 +11,7 @@ void player_init()
 	player.direction = right;
 	player.connectFlag = FALSE;
 	player.cnt = 0;
+	player.score = 0;
 	player.hp = 1;
 }
 
@@ -20,36 +21,36 @@ void player_update()
 	if (STATE(0) & PAD_RIGHT)
 	{
 		player.direction = right;
-		player.pos.x += 5;
-		//if (player.speed.x < 10 && game_timer % 2 == 0)
-		//{
-		//	player.speed.x++;
-		//}
+		//player.pos.x += 5;
+		if (player.speed.x < 10 && game_timer % 2 == 0)
+		{
+			player.speed.x++;
+		}
 	}
 	//ŠŠ‚é
-	//else if (player.speed.x > 0 && game_timer % 3 == 0)
-	//{
-	//	player.speed.x--;
-	//	
-	//}
+	else if (player.speed.x > 0 && game_timer % 3 == 0)
+	{
+		player.speed.x--;
+		
+	}
 	//¶‚ÉˆÚ“®‚·‚é
 	if (STATE(0) & PAD_LEFT)
 	{
 		player.direction = left;
-		player.pos.x -= 5;
-		//if (player.speed.x > -10 && game_timer % 2 == 0)
-		//{
-		//	player.speed.x--;
-		//}
+		//player.pos.x -= 5;
+		if (player.speed.x > -10 && game_timer % 2 == 0)
+		{
+			player.speed.x--;
+		}
 		
 	}
 	//ŠŠ‚é
-	//else if (player.speed.x < 0 && game_timer % 3 == 0)
-	//{
-	//	player.speed.x++;
-	//}
+	else if (player.speed.x < 0 && game_timer % 3 == 0)
+	{
+		player.speed.x++;
+	}
 
-	//player.pos.x += player.speed.x;
+	player.pos.x += player.speed.x;
 	
 	if (STATE(0) & PAD_UP)
 	{
@@ -86,13 +87,13 @@ void player_update()
 	switch (player.direction)
 	{
 	case right:
-		player.hookPos.x = player.pos.x + 4 * MAPCHIP_SIZE;
+		player.hookPos.x = player.pos.x + 5 * MAPCHIP_SIZE;
 		break;
 	case left:
-		player.hookPos.x = player.pos.x - 4 * MAPCHIP_SIZE;
+		player.hookPos.x = player.pos.x - 3 * MAPCHIP_SIZE;
 		break;
 	case up:
-		player.hookPos.x = player.pos.x + 60;
+		player.hookPos.x = player.pos.x + MAPCHIP_SIZE;
 		break;
 	default:
 		break;
@@ -169,7 +170,7 @@ void player_draw()
 	
 	if (player.hookFlag)
 	{
-		primitive::circle(player.hookPos.x, player.hookPos.y + 20, 20, 0, 1, 0);
+		primitive::circle(player.hookPos.x + 20, player.hookPos.y + 20, 20, 0, 1, 0);
 	}
 
 
