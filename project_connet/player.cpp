@@ -7,12 +7,12 @@ extern int game_timer;
 void player_init()
 {
 	player.pos.x = 0;
-	player.pos.y = 0;
+	player.pos.y = 800;
 	player.direction = right;
 	player.connectFlag = FALSE;
 	player.cnt = 0;
 	player.score = 0;
-	player.hp = 1;
+	player.hp = 3;
 }
 
 void player_update()
