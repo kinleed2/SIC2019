@@ -30,4 +30,9 @@ enum DIRECTION
 	right, left ,up
 };
 
+enum STAGE
+{
+	stage1set, stage1play, stage1end,stage2set, stage2play, stage2end, stage3set, stage3play, stage3end
+};
+
 #endif// ! INCLUDED_COMMON

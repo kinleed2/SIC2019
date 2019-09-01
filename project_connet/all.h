@@ -29,6 +29,7 @@ using namespace input;      // –{—ˆƒwƒbƒ_‚É‘‚­‚×‚«‚Å‚Í‚È‚¢iŠwK‚µ‚â‚·‚³‚ğ—Dæ
 #include "map.h"
 #include "check.h"
 #include "enemy.h"
+#include "stage.h"
 
 //******************************************************************************
 #endif // !INCLUDED_ALL

@@ -2,7 +2,7 @@
 
 extern OBJ2D player;
 extern OBJ2D map[24][32];
-extern OBJ2D enemy[3];
+extern OBJ2D enemyGuard[3];
 extern int game_state;
 
 int check_conncet()
@@ -29,67 +29,76 @@ int check_conncet()
 	return FALSE;
 }
 
-void check_enemy_0()
+void check_enemy_guard(int returnStage)
 {
-	
-	if (enemy[0].direction == right 
-		&& player.pos.x < enemy[0].pos.x + 80 +100 
-		&& player.pos.x + 80 > enemy[0].pos.x 
-		&&player.pos.y +120 >= enemy[0].pos.y 
-		&& player.pos.y < enemy[0].pos.y + 120)
+	int l;
+	for (l = 0; l < 3; l++)
 	{
-		player.hp--;
-		game_state = 0;
-	}
-	if  (enemy[0].direction == left 
-		&& player .pos.x +80 < enemy[0].pos.x + 80
-		&& player.pos.x +80 > enemy[0].pos.x - 100
-		&& player.pos.y +120 >= enemy[0].pos.y
-		&& player.pos.y < enemy[0].pos.y + 120)
-	{
-		player.hp--;
-		game_state = 0;
-	}
 
-	int i, j, k = 0;
-	for (i = 0; i < 24; i++)
-	{
-		for (j = 0; j < 32; j++)
+		if (enemyGuard[l].exist == FALSE) continue;
+
+
+		if (enemyGuard[l].direction == right
+			&& player.pos.x < enemyGuard[l].pos.x + 80 + 100
+			&& player.pos.x + 80 > enemyGuard[l].pos.x
+			&&player.pos.y + 120 >= enemyGuard[l].pos.y
+			&& player.pos.y < enemyGuard[l].pos.y + 120)
 		{
+			player.hp--;
+			game_state = returnStage;
+		}
 
-			if (map[i][j].type == 2
-				&& map[i][j].connectFlag == TRUE)
+		if (enemyGuard[l].direction == left
+			&& player.pos.x + 80 < enemyGuard[l].pos.x + 80
+			&& player.pos.x + 80 > enemyGuard[l].pos.x - 100
+			&& player.pos.y + 120 >= enemyGuard[l].pos.y
+			&& player.pos.y < enemyGuard[l].pos.y + 120)
+		{
+			player.hp--;
+			game_state = returnStage;
+		}
+
+		int i, j, k = 0;
+		for (i = 0; i < 24; i++)
+		{
+			for (j = 0; j < 32; j++)
 			{
-				k++;
-				if (enemy[0].pos.y + MAPCHIP_SIZE == map[i][j].pos.y
-					&& enemy[0].pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
-					&& enemy[0].pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
-				{
-					map[i][j].connectFlag = FALSE;
-					player.cnt = 0;
 
-					if (k == 2)
+				if (map[i][j].type == 2
+					&& map[i][j].connectFlag == TRUE)
+				{
+					k++;
+					if (enemyGuard[l].pos.y + MAPCHIP_SIZE == map[i][j].pos.y
+						&& enemyGuard[l].pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
+						&& enemyGuard[l].pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 					{
-						player.score--;
+						map[i][j].connectFlag = FALSE;
+						player.cnt = 0;
+
+						if (k == 2)
+						{
+							player.score--;
+						}
 					}
 				}
-
 			}
-
-
-
-
 		}
+
+
 	}
+		
+	
+	
+	
 
 	//debug::setString("check.hp:%d", player.hp);
 }
 
 
 
-void check()
+void check(int returnStage,int nextStage)
 {
-	check_enemy_0();
+	check_enemy_guard(returnStage);
 
 	int i, j;
 	for ( i = 0; i < 24; i++)
@@ -102,7 +111,7 @@ void check()
 				&& player.pos.x >= map[i][j].pos.x - MAPCHIP_SIZE
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
-				game_state = 2;
+				game_state = nextStage;
 			}
 
 		}

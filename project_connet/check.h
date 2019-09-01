@@ -14,7 +14,7 @@
 
 //------< プロトタイプ宣言 >-----------------------------------------------------
 int  check_conncet();
-void check();
-void check_enemy_0();
+void check(int returnStage,int nextStage);
+void check_enemy_guard(int returnStage);
 
 #endif // !INCLUDED_CHECK
