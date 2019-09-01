@@ -106,7 +106,7 @@ void player_update()
 		for (j = 0; j < 32; j++)
 		{
 		if (map[i][j].type == 1
-			&& player.hookPos.y + MAPCHIP_SIZE >= map[i][j].pos.y
+			&& player.hookPos.y + 2 * MAPCHIP_SIZE >= map[i][j].pos.y
 			&& player.hookPos.y <= map[i][j].pos.y 
 			&& player.hookPos.x >= map[i][j].pos.x
 			&& player.hookPos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
