@@ -27,7 +27,7 @@
 //
 enum DIRECTION
 {
-	right, left ,up
+	right, left ,up ,down
 };
 
 enum STAGE
