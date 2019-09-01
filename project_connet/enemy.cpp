@@ -180,28 +180,56 @@ void enemy_uav_move(OBJ2D *obj, int mode,int leftLimit, int rightLimit, int spee
 
 }
 
-void enemy_camera_move(OBJ2D *obj, int leftLimit, int rightLimit, int speed)
+void enemy_camera_move(OBJ2D *obj, int mode, int leftLimit, int rightLimit, int speed, int upLimit, int downLimit)
 {
-
-	switch (obj->direction)
+	switch (mode)
 	{
-	case left:
-		obj->pos.x -= speed;
-		if (obj->pos.x <= leftLimit)
+	case 1:
+		switch (obj->direction)
 		{
-			obj->direction = right;
+		case left:
+			obj->pos.x -= speed;
+			if (obj->pos.x <= leftLimit)
+			{
+				obj->direction = right;
+			}
+			break;
+		case right:
+			obj->pos.x += speed;
+			if (obj->pos.x >= rightLimit)
+			{
+				obj->direction = left;
+			}
+			break;
+		default:
+			break;
 		}
 		break;
-	case right:
-		obj->pos.x += speed;
-		if (obj->pos.x >= rightLimit)
+	case 2:
+		switch (obj->direction)
 		{
-			obj->direction = left;
+		case up:
+			obj->pos.y -= speed;
+			if (obj->pos.y <= upLimit)
+			{
+				obj->direction = down;
+			}
+			break;
+		case down:
+			obj->pos.y += speed;
+			if (obj->pos.y >= downLimit)
+			{
+				obj->direction = up;
+			}
+			break;
+		default:
+			break;
 		}
 		break;
 	default:
 		break;
 	}
+	
 
 
 }
