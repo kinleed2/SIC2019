@@ -1,6 +1,6 @@
 #include "all.h"
 
-OBJ2D enemy[3];
+OBJ2D enemyGuard[3];
 extern int game_timer;
 
 void enemy_init()
@@ -9,9 +9,9 @@ void enemy_init()
 	int i;
 	for (i = 0; i < 3; i++)
 	{
-		if (enemy[i].exist == TRUE)
+		if (enemyGuard[i].exist == TRUE)
 		{
-			enemy[i].exist = FALSE;
+			enemyGuard[i].exist = FALSE;
 		}
 
 	}
@@ -28,16 +28,16 @@ void enemy_draw()
 	int i;
 	for ( i = 0; i < 3; i++)
 	{
-		if (enemy[i].exist == TRUE)
+		if (enemyGuard[i].exist == TRUE)
 		{
-			primitive::rect(enemy[i].pos.x, enemy[i].pos.y, 80, 120, 0, 0, 0, 1, 0, 1);
-			if (enemy[i].direction == right)
+			primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80, 120, 0, 0, 0, 1, 0, 1);
+			if (enemyGuard[i].direction == right)
 			{
-				primitive::rect(enemy[i].pos.x, enemy[i].pos.y, 80 + 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
+				primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80 + 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
 			}
 			else
 			{
-				primitive::rect(enemy[i].pos.x - 100, enemy[i].pos.y, 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
+				primitive::rect(enemyGuard[i].pos.x - 100, enemyGuard[i].pos.y, 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
 			}
 		}
 	}
