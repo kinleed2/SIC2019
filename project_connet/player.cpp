@@ -122,8 +122,7 @@ void player_update()
 				{
 					player.hookFlag = TRUE;
 
-					player.hookPos.y == map[i][j].pos.y - PL_HEIGHT;
-					player.hookPos.x == map[i][j].pos.x + MAPCHIP_SIZE;
+					player.hookPos.y = map[i][j].pos.y;
 
 					break;
 
@@ -224,5 +223,6 @@ void player_draw()
 	debug::setString("player.cnt:%d", player.cnt);
 	debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 	debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
+	debug::setString("player.hook.y:%f", player.hookPos.y);
 }
 
