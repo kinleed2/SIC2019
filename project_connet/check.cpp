@@ -3,6 +3,8 @@
 extern OBJ2D player;
 extern OBJ2D map[24][32];
 extern OBJ2D enemyGuard[3];
+extern OBJ2D enemyUav[3];
+extern OBJ2D enemyCamera[3];
 extern int game_state;
 
 int check_conncet()
