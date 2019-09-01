@@ -13,6 +13,7 @@
 int game_state;     // 状態
 int game_timer;     // タイマー
 
+Sprite* sprPlayer;
 
 
 
@@ -69,7 +70,7 @@ void game_update()
         //////// 初期設定 ////////
 
         // スプライトのロード
-        //sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
+        sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 
 		//map_init();
 		//
@@ -195,5 +196,5 @@ void game_end()
     }
 
     // スプライトの破棄 
-    //SAFE_DELETE(sprPlayer); // プレイヤースプライトの破棄
+    SAFE_DELETE(sprPlayer); // プレイヤースプライトの破棄
 }

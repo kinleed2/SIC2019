@@ -7,6 +7,13 @@ extern int game_timer;
 
 void player_init()
 {
+
+	player.data = sprPlayer;
+	player.texPivot = VECTOR2(0, 0);
+	player.texSize = VECTOR2(80, 112);
+	player.texPos = VECTOR2(0, 0);
+	player.scale = VECTOR2(1, 1);
+
 	player.pos.x = 0;
 	player.pos.y = 800;
 	player.direction = right;
@@ -32,7 +39,7 @@ void player_update()
 			}
 		}
 		//滑る
-		else if (player.speed.x > 0 && game_timer % 3 == 0)
+		else if (player.speed.x > 0 && game_timer % 1 == 0)
 		{
 			player.speed.x--;
 
@@ -49,7 +56,7 @@ void player_update()
 
 		}
 		//滑る
-		else if (player.speed.x < 0 && game_timer % 3 == 0)
+		else if (player.speed.x < 0 && game_timer % 1 == 0)
 		{
 			player.speed.x++;
 		}
@@ -139,17 +146,17 @@ void player_update()
 			switch (player.direction)
 			{
 			case right:
-				player.speed.x = +5;
+				player.speed.x = +2;
 				break;
 			case left:
-				player.speed.x = -5;
+				player.speed.x = -2;
 				break;
 			case up:
 				break;
 			default:
 				break;
 			}
-			player.speed.y = -10;
+			player.speed.y = -5;
 		}
 		//player.pos.x = player.hookPos.x;
 		//player.pos.y = player.hookPos.y - PL_HEIGHT;
@@ -198,21 +205,86 @@ void player_update()
 
 
 
+
+
+
+
+
+	if (player.type == 1)
+	{
+		if (player.anime == 6)
+		{
+			player.anime = 6;
+		}
+		else
+		{
+			if (player.direction == right)
+			{
+				player.texPos.y = (right + 2) * player.texSize.y;
+			}
+
+			if (player.direction == left)
+			{
+				player.texPos.y = (left + 2) * player.texSize.y;
+			}
+			//動画未完成
+			player.anime = 4 + game_timer / 10 % 3;
+		}
+		
+		
+	}
+	else
+	{
+		player.anime = 0;
+
+		if (player.direction == right)
+		{
+			player.texPos.y = right;
+
+		}
+		if (player.direction == left)
+		{
+			player.texPos.y = left * player.texSize.y;
+		}
+		if (STATE(0) & PAD_RIGHT || STATE(0) & PAD_LEFT)
+		{
+			player.anime = 2 + game_timer / 10 % 8;
+		}
+	}
+
 	
+	
+
+
+
 
 }
 
 
 void player_draw()
 {
+	sprite_render(player.data,                  // 使用するスプライト
+		player.pos.x, player.pos.y + 8,             // 位置
+		player.scale.x, player.scale.y,         // スケールv
+		player.texPos.x + player.anime * player.texSize.x, player.texPos.y,       // 元画像位置
+		player.texSize.x, player.texSize.y,     // 元画像大きさ
+		player.texPivot.x, player.texPivot.y,   // 基準点の位置
+		0.0f,
+		1,1,1,1
+		);
 
-	primitive::rect(player.pos.x, player.pos.y,80,120,0,0,0,1,0,0);
+
+	//primitive::rect(player.pos.x, player.pos.y,80,120,0,0,0,1,0,0);
 	
 	if (player.hookFlag && player.type == 0)
 	{
 		primitive::circle(player.hookPos.x, player.hookPos.y + 20, 20, 0, 1, 0);
 	}
-
+	
+	if (player.type == 1 && player.pos.y >= player.hookPos.y)
+	{
+		primitive::line(player.pos.x + 80, player.pos.y, player.hookPos.x, player.hookPos.y, 0, 1, 0);
+	}
 
 
 
@@ -223,6 +295,6 @@ void player_draw()
 	debug::setString("player.cnt:%d", player.cnt);
 	debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 	debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
-	debug::setString("player.hook.y:%f", player.hookPos.y);
+	debug::setString("player.anime:%d", player.anime);
 }
 
