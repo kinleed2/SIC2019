@@ -4,6 +4,7 @@ OBJ2D player;
 extern OBJ2D map[24][32];
 extern int game_timer;
 
+
 void player_init()
 {
 	player.pos.x = 0;
@@ -13,50 +14,55 @@ void player_init()
 	player.cnt = 0;
 	player.score = 0;
 	player.hp = 3;
+	player.type = 0;
 }
 
 void player_update()
 {
-	//‰E‚ÉˆÚ“®‚·‚é
-	if (STATE(0) & PAD_RIGHT)
+	if (player.type == 0)
 	{
-		player.direction = right;
-		//player.pos.x += 5;
-		if (player.speed.x < 10 && game_timer % 2 == 0)
+		//‰E‚ÉˆÚ“®‚·‚é
+		if (STATE(0) & PAD_RIGHT)
+		{
+			player.direction = right;
+			//player.pos.x += 5;
+			if (player.speed.x < 10 && game_timer % 2 == 0)
+			{
+				player.speed.x++;
+			}
+		}
+		//ŠŠ‚é
+		else if (player.speed.x > 0 && game_timer % 3 == 0)
+		{
+			player.speed.x--;
+
+		}
+		//¶‚ÉˆÚ“®‚·‚é
+		if (STATE(0) & PAD_LEFT)
+		{
+			player.direction = left;
+			//player.pos.x -= 5;
+			if (player.speed.x > -10 && game_timer % 2 == 0)
+			{
+				player.speed.x--;
+			}
+
+		}
+		//ŠŠ‚é
+		else if (player.speed.x < 0 && game_timer % 3 == 0)
 		{
 			player.speed.x++;
 		}
-	}
-	//ŠŠ‚é
-	else if (player.speed.x > 0 && game_timer % 3 == 0)
-	{
-		player.speed.x--;
-		
-	}
-	//¶‚ÉˆÚ“®‚·‚é
-	if (STATE(0) & PAD_LEFT)
-	{
-		player.direction = left;
-		//player.pos.x -= 5;
-		if (player.speed.x > -10 && game_timer % 2 == 0)
+
+		player.pos.x += player.speed.x;
+
+		if (STATE(0) & PAD_UP)
 		{
-			player.speed.x--;
+			player.direction = up;
+
 		}
-		
 	}
-	//ŠŠ‚é
-	else if (player.speed.x < 0 && game_timer % 3 == 0)
-	{
-		player.speed.x++;
-	}
-
-	player.pos.x += player.speed.x;
 	
-	if (STATE(0) & PAD_UP)
-	{
-		player.direction = up;
-
-	}
 
 
 
@@ -69,64 +75,98 @@ void player_update()
 		{
 			if (map[i][j].type == 1 
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE 
-				&& player.pos.x >= map[i][j].pos.x 
+				&& player.pos.x >= map[i][j].pos.x - MAPCHIP_SIZE
 				&& player.pos.y + PL_HEIGHT == map[i][j].pos.y)
 			{
 				player.groundFlag = TRUE;
 			}
 		}
 	}
-	if (player.groundFlag == FALSE)
+	if (player.groundFlag == FALSE && player.type == 0)
 	{
 		player.pos.y += 20;
 	}
 
 
 	//”ò‚Ô
-	player.hookFlag = FALSE;
-	switch (player.direction)
+	
+	if (player.type == 0 && player.groundFlag == TRUE)
 	{
-	case right:
-		player.hookPos.x = player.pos.x + 4 * MAPCHIP_SIZE;
-		break;
-	case left:
-		player.hookPos.x = player.pos.x - 2 * MAPCHIP_SIZE;
-		break;
-	case up:
-		player.hookPos.x = player.pos.x + MAPCHIP_SIZE;
-		break;
-	default:
-		break;
-	}
-
-	player.hookPos.y = player.pos.y - PL_HEIGHT;
-
-	for (i = 0; i < 24; i++)
-	{
-		for (j = 0; j < 32; j++)
+		player.hookFlag = FALSE;
+		switch (player.direction)
 		{
-		if (map[i][j].type == 1
-			&& player.hookPos.y + 2 * MAPCHIP_SIZE >= map[i][j].pos.y
-			&& player.hookPos.y <= map[i][j].pos.y 
-			&& player.hookPos.x >= map[i][j].pos.x
-			&& player.hookPos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
+		case right:
+			player.hookPos.x = player.pos.x + 4 * MAPCHIP_SIZE;
+			break;
+		case left:
+			player.hookPos.x = player.pos.x - 2 * MAPCHIP_SIZE;
+			break;
+		case up:
+			player.hookPos.x = player.pos.x + MAPCHIP_SIZE;
+			break;
+		default:
+			break;
+		}
+
+		player.hookPos.y = player.pos.y - PL_HEIGHT;
+
+		for (i = 0; i < 24; i++)
+		{
+			for (j = 0; j < 32; j++)
 			{
-				player.hookFlag = TRUE;
-				//player.hookPos.x = map[i][j].pos.x;
-				player.hookPos.y = map[i][j].pos.y;
-				
+				if (map[i][j].type == 1
+					&& player.hookPos.y + 2 * MAPCHIP_SIZE >= map[i][j].pos.y
+					&& player.hookPos.y <= map[i][j].pos.y
+					&& player.hookPos.x >= map[i][j].pos.x
+					&& player.hookPos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
+				{
+					player.hookFlag = TRUE;
+
+					player.hookPos.y == map[i][j].pos.y - PL_HEIGHT;
+					player.hookPos.x == map[i][j].pos.x + MAPCHIP_SIZE;
+
+					break;
+
+				}
 			}
 		}
 	}
+	
 	if (player.hookFlag)
 	{
 		if (TRG(0)& PAD_TRG1)
 		{
-			player.pos.x = player.hookPos.x;
-			player.pos.y = player.hookPos.y - PL_HEIGHT;
-
+			player.type = 1;
+			switch (player.direction)
+			{
+			case right:
+				player.speed.x = +5;
+				break;
+			case left:
+				player.speed.x = -5;
+				break;
+			case up:
+				break;
+			default:
+				break;
+			}
+			player.speed.y = -10;
 		}
+		//player.pos.x = player.hookPos.x;
+		//player.pos.y = player.hookPos.y - PL_HEIGHT;
 	}
+	if (player.type == 1)
+	{
+		
+		player.pos.x += player.speed.x;
+		player.pos.y += player.speed.y;
+	}
+	if (player.pos.y <= player.hookPos.y - PL_HEIGHT - MAPCHIP_SIZE)
+	{
+		player.type = 0;
+		player.hookFlag = FALSE;
+	}
+
 
 	//˜AŒ‹
 	for (i = 0; i < 24; i++)
@@ -134,7 +174,7 @@ void player_update()
 		for (j = 0; j < 32; j++)
 		{
 			if (map[i][j].type == 2
-				//&& map[i][j].connectFlag == FALSE
+				&& map[i][j].connectFlag == FALSE
 				&& player.pos.y + MAPCHIP_SIZE == map[i][j].pos.y
 				&& player.pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
@@ -169,7 +209,7 @@ void player_draw()
 
 	primitive::rect(player.pos.x, player.pos.y,80,120,0,0,0,1,0,0);
 	
-	if (player.hookFlag)
+	if (player.hookFlag && player.type == 0)
 	{
 		primitive::circle(player.hookPos.x, player.hookPos.y + 20, 20, 0, 1, 0);
 	}
@@ -183,5 +223,6 @@ void player_draw()
 	debug::setString("player.score:%d", player.score);
 	debug::setString("player.cnt:%d", player.cnt);
 	debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
+	debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
 }
 
