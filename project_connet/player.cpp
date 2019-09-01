@@ -227,7 +227,7 @@ void player_update()
 			{
 				player.texPos.y = (left + 2) * player.texSize.y;
 			}
-
+			//“®‰æ–¢Š®¬
 			player.anime = 4 + game_timer / 10 % 3;
 		}
 		
