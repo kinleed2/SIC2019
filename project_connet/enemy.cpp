@@ -46,28 +46,20 @@ void enemy_draw()
 		if (enemyUav[i].exist == TRUE)
 		{
 			primitive::rect(enemyUav[i].pos.x, enemyUav[i].pos.y, 40, 40, 0, 0, 0, 0.5, 0.5, 1);
-			if (enemyUav[i].direction == right)
-			{
-				primitive::rect(enemyUav[i].pos.x, enemyUav[i].pos.y, 40 + 100, 40, 0, 0, 0, 0.5, 0, 0.5, 0.5);
-			}
-			else
-			{
-				primitive::rect(enemyUav[i].pos.x - 100, enemyUav[i].pos.y, 100, 40, 0, 0, 0, 0.5, 0, 0.5, 0.5);
-			}
+
+			primitive::rect(enemyUav[i].pos.x - 60, enemyUav[i].pos.y + 40, 160, 160, 0, 0, 0, 0.5, 0, 0.5, 0.5);
+
+
+
 		}
-
-
 		if (enemyCamera[i].exist == TRUE)
 		{
 			primitive::rect(enemyCamera[i].pos.x, enemyCamera[i].pos.y, 160, 160, 0, 0, 0, 0.2, 0.2, 1, 0.5);
 			
 		}
 
-
-
 	}
 	
-
 }
 
 

@@ -14,7 +14,8 @@ int game_state;     // 状態
 int game_timer;     // タイマー
 
 Sprite* sprPlayer;
-
+Sprite* sprHook;
+Sprite* sprBg;
 
 
 
@@ -71,7 +72,8 @@ void game_update()
 
         // スプライトのロード
         sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
-
+		sprite_load(&sprHook, L"./Data/Images/hook.png");
+		sprite_load(&sprBg, L"./Data/Images/bg.png");
 		//map_init();
 		//
 		//enemy_init();
@@ -197,4 +199,9 @@ void game_end()
 
     // スプライトの破棄 
     SAFE_DELETE(sprPlayer); // プレイヤースプライトの破棄
-}
+	SAFE_DELETE(sprHook);
+	SAFE_DELETE(sprBg);
+
+
+	
+}		
