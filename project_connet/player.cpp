@@ -61,7 +61,7 @@ void player_update()
 
 
 	//—Ž‰º
-	player.groundFlag = 0;
+	player.groundFlag = FALSE;
 	int i, j;
 	for (i = 0; i < 24; i++)
 	{
@@ -78,7 +78,7 @@ void player_update()
 	}
 	if (player.groundFlag == FALSE)
 	{
-		player.pos.y += 40;
+		player.pos.y += 20;
 	}
 
 
@@ -87,10 +87,10 @@ void player_update()
 	switch (player.direction)
 	{
 	case right:
-		player.hookPos.x = player.pos.x + 5 * MAPCHIP_SIZE;
+		player.hookPos.x = player.pos.x + 4 * MAPCHIP_SIZE;
 		break;
 	case left:
-		player.hookPos.x = player.pos.x - 3 * MAPCHIP_SIZE;
+		player.hookPos.x = player.pos.x - 2 * MAPCHIP_SIZE;
 		break;
 	case up:
 		player.hookPos.x = player.pos.x + MAPCHIP_SIZE;
@@ -111,8 +111,8 @@ void player_update()
 			&& player.hookPos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
 				player.hookFlag = TRUE;
-				player.hookPos.x = map[i][j].pos.x;
-				player.hookPos.y = map[i][j].pos.y;
+				//player.hookPos.x = map[i][j].pos.x;
+				//player.hookPos.y = map[i][j].pos.y;
 				
 			}
 		}
@@ -170,7 +170,7 @@ void player_draw()
 	
 	if (player.hookFlag)
 	{
-		primitive::circle(player.hookPos.x + 20, player.hookPos.y + 20, 20, 0, 1, 0);
+		primitive::circle(player.hookPos.x, player.hookPos.y + 20, 20, 0, 1, 0);
 	}
 
 
