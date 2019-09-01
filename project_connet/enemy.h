@@ -17,5 +17,6 @@ void enemy_update();
 void enemy_draw();
 void enemy_guard_move(OBJ2D *obj,int leftLimit, int rightLimit, int speed);
 void enemy_guard_init(OBJ2D *obj, int x, int y, int direction);
-
+void enemy_uav_move(OBJ2D *obj, int mode, int leftLimit, int rightLimit, int speed, int upLimit, int downLimit);
+void enemy_camera_init(OBJ2D *obj, int x, int y, int direction);
 #endif // !INCLUDED_ENEMY
