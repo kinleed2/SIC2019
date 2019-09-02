@@ -17,11 +17,11 @@ Sprite* sprPlayer;
 Sprite* sprHook;
 Sprite* sprBg;
 Sprite* sprEnemy2;
-
+Sprite* sprMap;
 
 // 別のファイルの変数を使用する宣言
 extern int nextScene;
-
+extern OBJ2D player;
 
 
 
@@ -33,6 +33,8 @@ void game_init()
 {
     game_state = 0;
     game_timer = 0;
+
+	player.hp = 3;
 }
 
 //--------------------------------
@@ -59,11 +61,12 @@ void game_common()
 //--------------------------------
 void game_update()
 {
-	if (TRG(0) & PAD_START)
+	if (TRG(0) & PAD_START || player.hp == 0)
 	{
 		nextScene = SCENE_TITLE;
 	}
 
+	
 
     switch (game_state)
     {
@@ -75,6 +78,7 @@ void game_update()
 		sprite_load(&sprHook, L"./Data/Images/hook.png");
 		sprite_load(&sprBg, L"./Data/Images/bg.png");
 		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
+		sprite_load(&sprMap, L"./Data/Images/map.png");
 
 		//map_init();
 		//

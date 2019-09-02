@@ -32,22 +32,22 @@ void enemy_draw()
 	{
 		if (enemyGuard[i].exist == TRUE)
 		{
-			primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80, 120, 0, 0, 0, 1, 0, 1);
+			primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80, 120, 0, 0, 0, 1, 1,1);
 			if (enemyGuard[i].direction == right)
 			{
-				primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80 + 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
+				primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80 + 100, 120, 0, 0, 0, 1, 0, 0, 0.7);
 			}
 			else
 			{
-				primitive::rect(enemyGuard[i].pos.x - 100, enemyGuard[i].pos.y, 100, 120, 0, 0, 0, 1, 0, 1, 0.5);
+				primitive::rect(enemyGuard[i].pos.x - 100, enemyGuard[i].pos.y, 100, 120, 0, 0, 0, 1, 0, 0, 0.7);
 			}
 		}
 
 		if (enemyUav[i].exist == TRUE)
 		{
-			primitive::rect(enemyUav[i].pos.x, enemyUav[i].pos.y, 40, 40, 0, 0, 0, 0.5, 0.5, 1);
+			//primitive::rect(enemyUav[i].pos.x, enemyUav[i].pos.y, 40, 40, 0, 0, 0, 0.5, 0.5, 1);
 
-			primitive::rect(enemyUav[i].pos.x - 60, enemyUav[i].pos.y + 40, 160, 160, 0, 0, 0, 0.5, 0, 0.5, 0.5);
+			primitive::rect(enemyUav[i].pos.x - 60, enemyUav[i].pos.y + 40, 160, 160, 0, 0, 0, 1, 0, 0, 0.7);
 
 			
 			sprite_render(enemyUav[i].data,                  // 使用するスプライト
@@ -65,7 +65,7 @@ void enemy_draw()
 		}
 		if (enemyCamera[i].exist == TRUE)
 		{
-			primitive::rect(enemyCamera[i].pos.x, enemyCamera[i].pos.y, 160, 160, 0, 0, 0, 0.2, 0.2, 1, 0.5);
+			primitive::rect(enemyCamera[i].pos.x, enemyCamera[i].pos.y, 160, 160, 0, 0, 0, 0, 1, 0, 0.7);
 			
 
 			sprite_render(enemyCamera[i].data,                  // 使用するスプライト

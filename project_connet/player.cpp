@@ -17,12 +17,11 @@ void player_init()
 	player.pos.x = 0;
 	player.pos.y = 800;
 
-
 	player.direction = right;
 	player.connectFlag = FALSE;
 	player.cnt = 0;
 	player.score = 0;
-	player.hp = 3;
+	
 	player.type = 0;
 }
 
@@ -270,7 +269,7 @@ void player_update()
 void player_draw()
 {
 
-	primitive::rect(player.pos.x + 15, player.pos.y + 20, 50, 80, 0, 0, 0, 1, 0, 0);
+	primitive::rect(player.pos.x + 15, player.pos.y + 20, 50, 80, 0, 1, 0, 0, 1);
 
 
 	sprite_render(player.data,                  // 使用するスプライト
