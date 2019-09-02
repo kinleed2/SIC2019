@@ -153,11 +153,38 @@ void game_update()
 		//"D"を押すと次のステージへ
 		if (TRG(0) & PAD_TRG4)
 		{
-			game_state = stage3set;
+			game_state = stage4set;
 		}
 		break;
 
 	case stage3end:
+
+		Sleep(1000);
+		game_state++;
+		break;
+
+	case stage4set:
+
+		stage_4_init();
+
+		GameLib::setBlendMode(Blender::BS_ALPHA);
+
+		game_state++;
+
+		break;
+
+	case stage4play:
+
+		stage_4_update();
+
+		//"D"を押すと次のステージへ
+		if (TRG(0) & PAD_TRG4)
+		{
+			game_state = stage5set;
+		}
+		break;
+
+	case stage4end:
 
 		Sleep(1000);
 		game_state++;
