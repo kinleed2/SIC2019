@@ -29,7 +29,7 @@ void player_update()
 {
 
 	player.rpos.x = player.pos.x + 15;
-	player.rpos.y = player.pos.y + 20;
+	player.rpos.y = player.pos.y + 30;
 
 
 	if (player.type == 0)
@@ -269,7 +269,7 @@ void player_update()
 void player_draw()
 {
 
-	primitive::rect(player.pos.x + 15, player.pos.y + 20, 50, 80, 0, 1, 0, 0, 1);
+	primitive::rect(player.pos.x + 15, player.pos.y + 30, 50, 50, 0, 1, 0, 0, 1);
 
 
 	sprite_render(player.data,                  // 使用するスプライト
