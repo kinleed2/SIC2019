@@ -51,7 +51,7 @@ void check_enemy_guard(int returnStage)
 		}
 
 		if (enemyGuard[l].direction == left
-			&& player.pos.x + 80 < enemyGuard[l].pos.x + 80
+			&& player.pos.x < enemyGuard[l].pos.x + 80
 			&& player.pos.x + 80 > enemyGuard[l].pos.x - 100
 			&& player.pos.y + 120 >= enemyGuard[l].pos.y
 			&& player.pos.y < enemyGuard[l].pos.y + 120)
@@ -96,11 +96,60 @@ void check_enemy_guard(int returnStage)
 	//debug::setString("check.hp:%d", player.hp);
 }
 
+void check_enemy_uav(int returnStage)
+{
+	int l;
+	for (l = 0; l < 3; l++)
+	{
+
+		if (enemyUav[l].exist == FALSE) continue;
+
+
+		if (player.pos.x < enemyUav[l].pos.x + 100
+			&& player.pos.x > enemyUav[l].pos.x - 60
+			&& player.pos.y > enemyUav[l].pos.y + 40
+			&& player.pos.y < enemyUav[l].pos.y + 200)
+		{
+			player.hp--;
+			game_state = returnStage;
+		}
+
+	}
+}
+
+void check_enemy_camera(int returnStage)
+{
+	int l;
+	for (l = 0; l < 3; l++)
+	{
+
+		if (enemyCamera[l].exist == FALSE) continue;
+
+
+		if (player.pos.x < enemyCamera[l].pos.x + 160
+			&& player.pos.x > enemyCamera[l].pos.x
+			&&player.pos.y  > enemyCamera[l].pos.y
+			&& player.pos.y < enemyCamera[l].pos.y + 160)
+		{
+			player.hp--;
+			game_state = returnStage;
+		}
+
+
+	}
+}
+
+
+
+
+
 
 
 void check(int returnStage,int nextStage)
 {
 	check_enemy_guard(returnStage);
+	check_enemy_uav(returnStage);
+	check_enemy_camera(returnStage);
 
 	int i, j;
 	for ( i = 0; i < 24; i++)

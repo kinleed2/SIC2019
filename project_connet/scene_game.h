@@ -11,11 +11,11 @@
 
 //------< 定数 >----------------------------------------------------------------
 extern Sprite* sprPlayer;
-extern Sprite* sprBG;
+extern Sprite* sprBg;
 extern Sprite* sprEnemy;
 extern Sprite* sprEfc;
 extern Sprite* sprNumber;
-
+extern Sprite* sprHook;
 //------< プロトタイプ宣言 >-----------------------------------------------------
 void game_init();
 void game_update();

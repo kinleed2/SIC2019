@@ -48,6 +48,17 @@ void map_update(int stage[24][32])
 
 void map_draw()
 {
+
+	sprite_render(sprBg,                  // 使用するスプライト
+		0,0,             // 位置
+		1, 1,         // スケールv
+		0, 0,      // 元画像位置
+		1280, 960,   // 元画像大きさ
+		0, 0,   // 基準点の位置
+		0.0f,
+		1, 1, 1, 1
+		);
+
 	
 	int i, j, k = 0;
 	for (i = 0; i < 24; i++)
@@ -57,7 +68,7 @@ void map_draw()
 			switch (map[i][j].type)
 			{
 			case 1:
-				primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 1);
+				primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 1,0.5);
 				break;
 			case 2:
 				primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 0);
