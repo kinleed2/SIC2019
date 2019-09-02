@@ -16,7 +16,7 @@ int game_timer;     // タイマー
 Sprite* sprPlayer;
 Sprite* sprHook;
 Sprite* sprBg;
-
+Sprite* sprEnemy2;
 
 
 // 別のファイルの変数を使用する宣言
@@ -74,6 +74,8 @@ void game_update()
         sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 		sprite_load(&sprHook, L"./Data/Images/hook.png");
 		sprite_load(&sprBg, L"./Data/Images/bg.png");
+		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
+
 		//map_init();
 		//
 		//enemy_init();
@@ -201,6 +203,7 @@ void game_end()
     SAFE_DELETE(sprPlayer); // プレイヤースプライトの破棄
 	SAFE_DELETE(sprHook);
 	SAFE_DELETE(sprBg);
+	SAFE_DELETE(sprEnemy2);
 
 
 	

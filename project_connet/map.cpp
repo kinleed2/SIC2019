@@ -84,7 +84,7 @@ void map_draw()
 				}
 				break;
 			case 4: 
-				primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 1,0.2);
+				primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 1, 0.2);
 				break;
 			default:
 				break;

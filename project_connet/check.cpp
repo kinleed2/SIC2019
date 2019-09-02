@@ -41,20 +41,20 @@ void check_enemy_guard(int returnStage)
 
 
 		if (enemyGuard[l].direction == right
-			&& player.pos.x < enemyGuard[l].pos.x + 80 + 100
-			&& player.pos.x + 80 > enemyGuard[l].pos.x
-			&&player.pos.y + 120 >= enemyGuard[l].pos.y
-			&& player.pos.y < enemyGuard[l].pos.y + 120)
+			&& player.rpos.x < enemyGuard[l].pos.x + 80 + 100
+			&& player.rpos.x + 50 > enemyGuard[l].pos.x
+			&&player.rpos.y + 60 >= enemyGuard[l].pos.y
+			&& player.rpos.y < enemyGuard[l].pos.y + 120)
 		{
 			player.hp--;
 			game_state = returnStage;
 		}
 
 		if (enemyGuard[l].direction == left
-			&& player.pos.x < enemyGuard[l].pos.x + 80
-			&& player.pos.x + 80 > enemyGuard[l].pos.x - 100
-			&& player.pos.y + 120 >= enemyGuard[l].pos.y
-			&& player.pos.y < enemyGuard[l].pos.y + 120)
+			&& player.rpos.x < enemyGuard[l].pos.x + 80
+			&& player.rpos.x + 50 > enemyGuard[l].pos.x - 100
+			&& player.rpos.y + 60 >= enemyGuard[l].pos.y
+			&& player.rpos.y < enemyGuard[l].pos.y + 120)
 		{
 			player.hp--;
 			game_state = returnStage;
@@ -116,10 +116,10 @@ void check_enemy_uav(int returnStage)
 		if (enemyUav[l].exist == FALSE) continue;
 
 
-		if (player.pos.x < enemyUav[l].pos.x + 100
-			&& player.pos.x > enemyUav[l].pos.x - 60
-			&& player.pos.y > enemyUav[l].pos.y + 40
-			&& player.pos.y < enemyUav[l].pos.y + 200)
+		if (player.rpos.x < enemyUav[l].pos.x + 100
+			&& player.rpos.x + 50 > enemyUav[l].pos.x - 60
+			&& player.rpos.y + 60 > enemyUav[l].pos.y + 40
+			&& player.rpos.y < enemyUav[l].pos.y + 200)
 		{
 			player.hp--;
 			game_state = returnStage;
@@ -137,10 +137,10 @@ void check_enemy_camera(int returnStage)
 		if (enemyCamera[l].exist == FALSE) continue;
 
 
-		if (player.pos.x < enemyCamera[l].pos.x + 160
-			&& player.pos.x > enemyCamera[l].pos.x
-			&&player.pos.y  > enemyCamera[l].pos.y
-			&& player.pos.y < enemyCamera[l].pos.y + 160)
+		if (player.rpos.x < enemyCamera[l].pos.x + 160
+			&& player.rpos.x + 50 > enemyCamera[l].pos.x
+			&&player.rpos.y  + 60 > enemyCamera[l].pos.y
+			&& player.rpos.y < enemyCamera[l].pos.y + 160)
 		{
 			player.hp--;
 			game_state = returnStage;
@@ -170,7 +170,7 @@ void check(int returnStage,int nextStage)
 			if (check_conncet() == TRUE
 				&& map[i][j].type == 3
 				&& player.pos.y + MAPCHIP_SIZE == map[i][j].pos.y
-				&& player.pos.x >= map[i][j].pos.x - MAPCHIP_SIZE
+				&& player.pos.x + 80 >= map[i][j].pos.x
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
 				game_state = nextStage;
