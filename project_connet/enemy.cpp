@@ -32,7 +32,7 @@ void enemy_draw()
 	{
 		if (enemyGuard[i].exist == TRUE)
 		{
-			primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80, 120, 0, 0, 0, 1, 1,1);
+
 			if (enemyGuard[i].direction == right)
 			{
 				primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80 + 100, 120, 0, 0, 0, 1, 0, 0, 0.7);
@@ -41,6 +41,22 @@ void enemy_draw()
 			{
 				primitive::rect(enemyGuard[i].pos.x - 100, enemyGuard[i].pos.y, 100, 120, 0, 0, 0, 1, 0, 0, 0.7);
 			}
+
+
+			primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80, 120, 0, 0, 0, 1, 1,1);
+			
+			sprite_render(enemyGuard[i].data,                  // 使用するスプライト
+				enemyGuard[i].pos.x, enemyGuard[i].pos.y,             // 位置
+				enemyGuard[i].scale.x, enemyGuard[i].scale.y,         // スケールv
+				enemyGuard[i].texPos.x + enemyGuard[i].anime * enemyGuard[i].texSize.x, 
+				enemyGuard[i].texPos.y + enemyGuard[i].direction * enemyGuard[i].texSize.y,       // 元画像位置
+				enemyGuard[i].texSize.x, enemyGuard[i].texSize.y,     // 元画像大きさ
+				enemyGuard[i].texPivot.x, enemyGuard[i].texPivot.y,   // 基準点の位置
+				enemyGuard[i].rotate,
+				1, 1, 1, 1
+				);
+
+		
 		}
 
 		if (enemyUav[i].exist == TRUE)
@@ -93,7 +109,13 @@ void enemy_guard_init(OBJ2D *obj, float x, float y, int direction)
 	obj->pos.y = y;
 	obj->direction = direction;
 	obj->exist = TRUE;
+	obj->data = sprEnemy;
+	obj->texPos = VECTOR2(0, 0);
+	obj->texPivot = VECTOR2(0, 0);
+	obj->texSize = VECTOR2(80, 120);
+	obj->scale = VECTOR2(1, 1);
 }
+
 
 void enemy_uav_init(OBJ2D *obj, float x, float y, int direction)
 {
@@ -136,6 +158,7 @@ void enemy_guard_move(OBJ2D *obj,int leftLimit, int rightLimit,int speed)
 		if (obj->pos.x <= leftLimit)
 		{
 			obj->direction = right;
+			
 		}
 		break;
 	case right:
@@ -143,11 +166,15 @@ void enemy_guard_move(OBJ2D *obj,int leftLimit, int rightLimit,int speed)
 		if (obj->pos.x >= rightLimit)
 		{
 			obj->direction = left;
+			
 		}
 		break;
 	default:
 		break;
 	}
+
+	obj->anime = 2 + game_timer / 20 % 4;
+
 
 
 }

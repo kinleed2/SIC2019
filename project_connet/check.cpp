@@ -43,7 +43,7 @@ void check_enemy_guard(int returnStage)
 		if (enemyGuard[l].direction == right
 			&& player.rpos.x < enemyGuard[l].pos.x + 80 + 100
 			&& player.rpos.x + 50 > enemyGuard[l].pos.x
-			&&player.rpos.y + 60 >= enemyGuard[l].pos.y
+			&&player.rpos.y + 50 >= enemyGuard[l].pos.y
 			&& player.rpos.y < enemyGuard[l].pos.y + 120)
 		{
 			player.hp--;
@@ -53,7 +53,7 @@ void check_enemy_guard(int returnStage)
 		if (enemyGuard[l].direction == left
 			&& player.rpos.x < enemyGuard[l].pos.x + 80
 			&& player.rpos.x + 50 > enemyGuard[l].pos.x - 100
-			&& player.rpos.y + 60 >= enemyGuard[l].pos.y
+			&& player.rpos.y + 50 >= enemyGuard[l].pos.y
 			&& player.rpos.y < enemyGuard[l].pos.y + 120)
 		{
 			player.hp--;
@@ -118,7 +118,7 @@ void check_enemy_uav(int returnStage)
 
 		if (player.rpos.x < enemyUav[l].pos.x + 100
 			&& player.rpos.x + 50 > enemyUav[l].pos.x - 60
-			&& player.rpos.y + 60 > enemyUav[l].pos.y + 40
+			&& player.rpos.y + 50 > enemyUav[l].pos.y + 40
 			&& player.rpos.y < enemyUav[l].pos.y + 200)
 		{
 			player.hp--;
@@ -139,7 +139,7 @@ void check_enemy_camera(int returnStage)
 
 		if (player.rpos.x < enemyCamera[l].pos.x + 160
 			&& player.rpos.x + 50 > enemyCamera[l].pos.x
-			&&player.rpos.y  + 60 > enemyCamera[l].pos.y
+			&&player.rpos.y  + 50 > enemyCamera[l].pos.y
 			&& player.rpos.y < enemyCamera[l].pos.y + 160)
 		{
 			player.hp--;
