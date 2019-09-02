@@ -16,6 +16,7 @@ int game_timer;     // タイマー
 Sprite* sprPlayer;
 Sprite* sprHook;
 Sprite* sprBg;
+Sprite* sprEnemy;
 Sprite* sprEnemy2;
 Sprite* sprMap;
 
@@ -81,6 +82,7 @@ void game_update()
         sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 		sprite_load(&sprHook, L"./Data/Images/hook.png");
 		sprite_load(&sprBg, L"./Data/Images/bg.png");
+		sprite_load(&sprEnemy, L"./Data/Images/enemy.png");
 		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
 		sprite_load(&sprMap, L"./Data/Images/map.png");
 
@@ -265,7 +267,7 @@ void game_end()
 	SAFE_DELETE(sprHook);
 	SAFE_DELETE(sprBg);
 	SAFE_DELETE(sprEnemy2);
-
-
+	SAFE_DELETE(sprEnemy);
+	SAFE_DELETE(sprMap);
 	
 }		

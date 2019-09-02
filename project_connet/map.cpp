@@ -57,10 +57,6 @@ void map_draw()
 
 
 
-
-
-
-
 	sprite_render(sprBg,                  // 使用するスプライト
 		0,0,             // 位置
 		1, 1,         // スケールv
