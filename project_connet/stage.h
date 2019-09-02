@@ -18,6 +18,11 @@ void stage_2_init();
 void stage_2_update();
 void stage_3_init();
 void stage_3_update();
+void stage_4_init();
+void stage_4_update();
+void stage_5_init();
+void stage_5_update();
+
 
 
 #endif // !INCLUDED_STAGE
