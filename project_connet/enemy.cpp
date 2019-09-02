@@ -16,6 +16,16 @@ void enemy_init()
 			enemyGuard[i].exist = FALSE;
 		}
 
+		if (enemyUav[i].exist == TRUE)
+		{
+			enemyUav[i].exist = FALSE;
+		}
+
+		if (enemyCamera[i].exist == TRUE)
+		{
+			enemyCamera[i].exist = FALSE;
+		}
+
 	}
 }
 

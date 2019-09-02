@@ -61,7 +61,11 @@ void game_common()
 //--------------------------------
 void game_update()
 {
-	if (TRG(0) & PAD_START || player.hp == 0)
+	//if (TRG(0) & PAD_START || player.hp == 0)
+	//{
+	//	nextScene = SCENE_TITLE;
+	//}
+	if (TRG(0) & PAD_START)
 	{
 		nextScene = SCENE_TITLE;
 	}
@@ -194,6 +198,32 @@ void game_update()
 		game_state++;
 		break;
 
+	case stage5set:
+
+		stage_5_init();
+
+		GameLib::setBlendMode(Blender::BS_ALPHA);
+
+		game_state++;
+
+		break;
+
+	case stage5play:
+
+		stage_5_update();
+
+		//"D"を押すと次のステージへ
+		if (TRG(0) & PAD_TRG4)
+		{
+			game_state = stage4set;
+		}
+		break;
+
+	case stage5end:
+
+		Sleep(1000);
+		game_state++;
+		break;
 
     }
     game_timer++;
