@@ -70,6 +70,7 @@ void check_enemy_guard(int returnStage)
 					&& map[i][j].connectFlag == TRUE)
 				{
 					k++;
+
 					if (enemyGuard[l].pos.y + MAPCHIP_SIZE == map[i][j].pos.y
 						&& enemyGuard[l].pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
 						&& enemyGuard[l].pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
@@ -81,12 +82,22 @@ void check_enemy_guard(int returnStage)
 						{
 							player.score--;
 						}
+
 					}
 				}
 			}
 		}
 
-
+		if (k == 2 && player.cnt == 0)
+		{
+			for (i = 0; i < 24; i++)
+			{
+				for (j = 0; j < 32; j++)
+				{
+					map[i][j].connectFlag = FALSE;
+				}
+			}
+		}
 	}
 		
 	
