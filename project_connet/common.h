@@ -32,7 +32,7 @@ enum DIRECTION
 
 enum STAGE
 {
-	stage1set, stage1play, stage1end,stage2set, stage2play, stage2end, stage3set, stage3play, stage3end
+	stage1set, stage1play, stage1end,stage2set, stage2play, stage2end, stage3set, stage3play, stage3end, stage4set, stage4play, stage4end, stage5set, stage5play, stage5end
 };
 
 #endif// ! INCLUDED_COMMON
