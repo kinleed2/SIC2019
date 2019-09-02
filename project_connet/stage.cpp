@@ -291,9 +291,9 @@ void stage_5_update()
 	//マップチップ更新
 	map_update(stage5);
 	//敵の移動
-	enemy_guard_move(enemyGuard, 280, 1200, 1);
-	enemy_guard_move(enemyGuard + 1, 280, 1200, 1);
-	enemy_guard_move(enemyGuard + 2, 680, 1200, 1);
+	enemy_guard_move(enemyGuard, 280, 1000, 1);
+	enemy_guard_move(enemyGuard + 1, 280, 1000, 1);
+	enemy_guard_move(enemyGuard + 2, 680, 1050, 1);
 	//enemy_camera_move(enemyCamera, 1, 120, 440, 1, 0, 0);h
 	//enemy_camera_move(enemyCamera + 1, 1, 760, 340, 0, 0, 0);
 	enemy_uav_move(enemyUav, 2, 80, 480, 2, 320, 680);
