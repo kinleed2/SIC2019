@@ -16,12 +16,12 @@ int game_timer;     // タイマー
 Sprite* sprPlayer;
 Sprite* sprHook;
 Sprite* sprBg;
-
-
+Sprite* sprEnemy2;
+Sprite* sprMap;
 
 // 別のファイルの変数を使用する宣言
 extern int nextScene;
-
+extern OBJ2D player;
 
 
 
@@ -33,6 +33,8 @@ void game_init()
 {
     game_state = 0;
     game_timer = 0;
+
+	player.hp = 3;
 }
 
 //--------------------------------
@@ -59,11 +61,12 @@ void game_common()
 //--------------------------------
 void game_update()
 {
-	if (TRG(0) & PAD_START)
+	if (TRG(0) & PAD_START || player.hp == 0)
 	{
 		nextScene = SCENE_TITLE;
 	}
 
+	
 
     switch (game_state)
     {
@@ -74,6 +77,9 @@ void game_update()
         sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 		sprite_load(&sprHook, L"./Data/Images/hook.png");
 		sprite_load(&sprBg, L"./Data/Images/bg.png");
+		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
+		sprite_load(&sprMap, L"./Data/Images/map.png");
+
 		//map_init();
 		//
 		//enemy_init();
@@ -151,11 +157,38 @@ void game_update()
 		//"D"を押すと次のステージへ
 		if (TRG(0) & PAD_TRG4)
 		{
-			game_state = stage3set;
+			game_state = stage4set;
 		}
 		break;
 
 	case stage3end:
+
+		Sleep(1000);
+		game_state++;
+		break;
+
+	case stage4set:
+
+		stage_4_init();
+
+		GameLib::setBlendMode(Blender::BS_ALPHA);
+
+		game_state++;
+
+		break;
+
+	case stage4play:
+
+		stage_4_update();
+
+		//"D"を押すと次のステージへ
+		if (TRG(0) & PAD_TRG4)
+		{
+			game_state = stage5set;
+		}
+		break;
+
+	case stage4end:
 
 		Sleep(1000);
 		game_state++;
@@ -201,6 +234,7 @@ void game_end()
     SAFE_DELETE(sprPlayer); // プレイヤースプライトの破棄
 	SAFE_DELETE(sprHook);
 	SAFE_DELETE(sprBg);
+	SAFE_DELETE(sprEnemy2);
 
 
 	

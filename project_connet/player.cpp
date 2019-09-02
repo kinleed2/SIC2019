@@ -21,12 +21,17 @@ void player_init()
 	player.connectFlag = FALSE;
 	player.cnt = 0;
 	player.score = 0;
-	player.hp = 3;
+	
 	player.type = 0;
 }
 
 void player_update()
 {
+
+	player.rpos.x = player.pos.x + 15;
+	player.rpos.y = player.pos.y + 20;
+
+
 	if (player.type == 0)
 	{
 		//右に移動する
@@ -80,8 +85,8 @@ void player_update()
 		for (j = 0; j < 32; j++)
 		{
 			if (map[i][j].type == 1 
-				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE 
-				&& player.pos.x >= map[i][j].pos.x - MAPCHIP_SIZE
+				&& player.pos.x <= map[i][j].pos.x + 20
+				&& player.pos.x + 80 >= map[i][j].pos.x +20
 				&& player.pos.y + PL_HEIGHT == map[i][j].pos.y)
 			{
 				player.groundFlag = TRUE;
@@ -125,7 +130,11 @@ void player_update()
 					&& player.hookPos.x >= map[i][j].pos.x
 					&& player.hookPos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 				{
-					player.hookFlag = TRUE;
+					if (STATE(0) & PAD_R1)
+					{
+						player.hookFlag = TRUE;
+					}
+					
 
 					player.hookPos.y = map[i][j].pos.y;
 
@@ -165,7 +174,7 @@ void player_update()
 		player.pos.x += player.speed.x;
 		player.pos.y += player.speed.y;
 	}
-	if (player.pos.y <= player.hookPos.y - PL_HEIGHT - MAPCHIP_SIZE)
+	if (player.pos.y <= player.hookPos.y - PL_HEIGHT -  MAPCHIP_SIZE - 20)
 	{
 		player.type = 0;
 		player.hookFlag = FALSE;
@@ -183,7 +192,7 @@ void player_update()
 				&& player.pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
-				if (TRG(0)&PAD_TRG2)
+				if (TRG(0)&PAD_TRG1)
 				{
 					map[i][j].connectFlag = TRUE;
 					player.cnt++;
@@ -260,7 +269,7 @@ void player_update()
 void player_draw()
 {
 
-	primitive::rect(player.pos.x + 15, player.pos.y + 20, 50, 80, 0, 0, 0, 1, 0, 0);
+	primitive::rect(player.pos.x + 15, player.pos.y + 20, 50, 80, 0, 1, 0, 0, 1);
 
 
 	sprite_render(player.data,                  // 使用するスプライト

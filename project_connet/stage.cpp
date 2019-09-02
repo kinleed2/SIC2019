@@ -66,7 +66,7 @@ void stage_2_init()
 
 	enemy_init();
 	enemy_guard_init(enemyGuard, 690, 800, left);
-	enemy_camera_init(enemyCamera,680 ,320 , right);
+	enemy_camera_init(enemyCamera, 680, 320, right, 220, 0, 0);
 	//enemy_guard_init(enemyGuard + 1, 100, 250, right);
 }
 
@@ -123,8 +123,8 @@ void stage_3_init()
 	enemy_init();
 	enemy_guard_init(enemyGuard, 560, 800, left);
 	enemy_guard_init(enemyGuard + 1, 1200, 800, right);
-	enemy_camera_init(enemyCamera, 120, 760, left);
-	enemy_camera_init(enemyCamera + 1, 1080, 360, up);
+	enemy_camera_init(enemyCamera, 120, 760, left, 200, 0, 0);
+	enemy_camera_init(enemyCamera + 1, 1080, 360, up, 0, 0, -90);
 	enemy_uav_init(enemyUav, 400, 160, left);
 
 	//enemy_guard_init(enemyGuard + 1, 100, 250, right);
