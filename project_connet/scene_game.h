@@ -23,5 +23,6 @@ void game_init();
 void game_update();
 void game_draw();
 void game_end();
+void game_guide();
 
 #endif // !INCLUDED_SCENE_GAME

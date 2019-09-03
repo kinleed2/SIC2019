@@ -14,7 +14,7 @@ int title_state;    // 状態
 int title_timer;    // タイマー
 // フェードアウト用変数の宣言
 float fadeOut;
-
+float showPresent;
 // 別のファイルの変数を使用する宣言
 extern int nextScene;
 
@@ -28,6 +28,7 @@ void title_init()
 
     // フェードアウト用変数の初期設定
     fadeOut = 0.0f;
+	showPresent = 0.0f;
 }
 
 //--------------------------------
@@ -40,7 +41,10 @@ void title_update()
     case 0:
         //////// 初期設定 ////////
 
-        title_state++;
+		if (TRG(0) & PAD_START)
+		{
+			title_state++;
+		}
         break;
 
     case 1:
@@ -66,7 +70,7 @@ void title_update()
 
     // デバッグ用文字列の設定
     //debug::setString("title_state:%d", title_state);
-    //debug::setString("title_timer:%d", title_timer);
+    debug::setString("title_timer:%d", title_timer);
 }
 
 //--------------------------------
@@ -74,23 +78,44 @@ void title_update()
 //--------------------------------
 void title_draw()
 {
-    // 画面を黒で塗りつぶす
-    GameLib::clear(0, 0, 0);
+	// 画面を黒で塗りつぶす
+	GameLib::clear(0, 0, 0);
 
-    // 文字表示機能
-    //font::textOut(2, "ECC COMP", 50, 100, 2, 2, 1, 1, 0);
-    font::textOut(2, "Project Connect", 40, 250, 1.3f, 1.3f, 0, 1, 1);
 
-    // 文字を点滅させる
-    if (title_timer / 32 % 2)
-        font::textOut(3, "Push Start", 100, 500, 3, 3);
 
-    // タイトル画面のフェードアウト
-    if (fadeOut > 0.0f)
-    {
-        primitive::rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 
-            0, 0, 0, 0, 0, 0, fadeOut);
-    }
+
+	if (title_timer <= 1500 || title_state ==0)
+	{
+
+		
+
+	font::textOut(2, "present", 40, 250, 1.3f, 1.3f, 0, 1, 1, showPresent);
+	showPresent += 0.001f;
+	
+
+
+
+	}
+	if (title_state >= 1)
+	{
+	
+		GameLib::clear(0, 0, 0);
+		// 文字表示機能
+		//font::textOut(2, "ECC COMP", 50, 100, 2, 2, 1, 1, 0);
+		font::textOut(2, "Project Connect", 40, 250, 1.3f, 1.3f, 0, 1, 1);
+
+		// 文字を点滅させる
+		if (title_timer / 32 % 2)
+			font::textOut(3, "Push Start", 100, 500, 3, 3);
+
+		// タイトル画面のフェードアウト
+		if (fadeOut > 0.0f)
+		{
+			primitive::rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
+				0, 0, 0, 0, 0, 0, fadeOut);
+		}
+	}
+
 }
 
 //--------------------------------

@@ -110,7 +110,7 @@ void map_draw()
 			{
 				if (player.cnt == 1)
 				{
-					primitive::line(map[i][j].pos.x + 20 , map[i][j].pos.y + 20, player.pos.x + 40, player.pos.y + 40, 0, 1, 0,1,5);
+					primitive::line(map[i][j].pos.x + 20 , map[i][j].pos.y + 40, player.pos.x + 40, player.pos.y + 70, 1, 1, 1, 1,3);
 				}
 				else
 				{

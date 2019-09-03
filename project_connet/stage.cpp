@@ -3,6 +3,8 @@
 extern OBJ2D enemyGuard[3];
 extern OBJ2D enemyUav[3];
 extern OBJ2D enemyCamera[3];
+extern OBJ2D player;
+extern OBJ2D map[24][32];
 
 void stage_1_init()
 {
@@ -302,6 +304,320 @@ void stage_5_update()
 	player_update();
 
 	check(stage5set, stage5end);
+
+
+}
+
+
+
+void stage_0_init()
+{
+	map_init();
+
+	player_init();
+
+
+	enemy_init();
+
+	enemy_guard_init(enemyGuard, 1000, 800, left);
+
+	player.guideState = 0;
+
+	player.timer = 0;
+
+
+	player.pos.x = 200;
+}
+
+
+void stage_0_update()
+{
+	player.timer++;
+	//stage 0のデータ
+	int stage0[24][32] =
+	{	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,
+		0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,
+		0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,
+		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+	};
+	//マップチップ更新
+	map_update(stage0);
+
+	//enemy_guard_move(enemyGuard, 300, 900, 2);
+
+
+	switch (player.guideState)
+	{
+	case 0:
+		if (STATE(0) & PAD_LEFT)
+		{
+			player.direction = left;
+			//player.pos.x -= 5;
+			if (player.speed.x > -5 && player.timer % 2 == 0)
+			{
+				player.speed.x--;
+			}
+
+		}
+		//滑る
+		else if (player.speed.x < 0 && player.timer % 1 == 0)
+		{
+			player.speed.x++;
+		}
+
+		player.pos.x += player.speed.x;
+
+		if (player.pos.x <= 50)
+		{
+			player.speed.x = 0;
+			player.guideState++;
+		}
+
+		if (player.type == 0)
+		{
+			player.anime = 0;
+
+			if (player.direction == right)
+			{
+				player.texPos.y = right;
+
+			}
+			if (player.direction == left)
+			{
+				player.texPos.y = left * player.texSize.y;
+			}
+			if (STATE(0) & PAD_RIGHT || STATE(0) & PAD_LEFT)
+			{
+				player.anime = 2 + player.timer / 10 % 7;
+			}
+			else
+			{
+				player.anime = player.timer / 25 % 2;
+			}
+		}
+
+		break;
+
+	case 1:
+		if (STATE(0)& PAD_RIGHT)
+		{
+
+			player.direction = right;
+			if (player.speed.x < 5 && player.timer % 2 == 0)
+			{
+				player.speed.x++;
+			}
+		}
+		//滑る
+		else if (player.speed.x > 0 && player.timer % 1 == 0)
+		{
+			player.speed.x--;
+
+		}
+
+		player.pos.x += player.speed.x;
+
+		if (player.pos.x >= 250)
+		{
+			player.speed.x = 0;
+			player.guideState++;
+		}
+
+		if (player.type == 0)
+		{
+			player.anime = 0;
+
+			if (player.direction == right)
+			{
+				player.texPos.y = right;
+
+			}
+			if (player.direction == left)
+			{
+				player.texPos.y = left * player.texSize.y;
+			}
+			if (STATE(0) & PAD_RIGHT || STATE(0) & PAD_LEFT)
+			{
+				player.anime = 2 + player.timer / 10 % 7;
+			}
+			else
+			{
+				player.anime = player.timer / 25 % 2;
+			}
+		}
+
+		break;
+	
+	case 2:
+
+		
+		player_connect();
+
+		if (player.cnt == 1)
+		{
+			player.guideState++;
+		}
+
+		break;
+	case 3:
+		player_move();
+		if (player.pos.x >= 500)
+		{
+			player.speed.x = 0;
+			player.guideState++;
+		}
+
+		break;
+	case 4:
+
+	
+
+		player_fall();
+
+		player_hook();
+		
+		if (player.pos.y == 560 && player.pos.x >= 620)
+		{
+			player.speed.x = 0;
+			player.guideState++;
+		}
+	
+		break;
+	case 5:
+		player_connect();
+
+		if (player.score == 1)
+		{
+			player.guideState++;
+		}
+		break;
+	case 6:
+		enemyGuard[0].pos.x -= 1.5f;
+
+		enemyGuard[0].anime = 2 + player.timer / 20 % 4;
+
+		if (player.score == 0)
+		{
+			Sleep(500);
+			player.guideState++;
+		}
+
+		break;
+	case 7:
+		if (STATE (0) & PAD_TRG1)
+		{
+			player.guideState++;
+		}
+		break;
+	case 8:
+		player_update();
+		enemy_guard_move(enemyGuard, 300, 900, 2);
+		break;
+
+	default:
+		break;
+	}
+
+
+	check(stage0set, stage0end);
+}
+
+void stage_0_draw()
+{
+	switch (player.guideState)
+	{
+	case 0:
+		primitive::rect(player.pos.x - 50, player.pos.y - 80, 250, 80, 0, 0, 0, 1, 1, 1, 1);
+		font::textOut(2, "Press <-", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 0, 0);
+
+
+		break;
+	case 1:
+		font::textOut(2, "Press ->", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+
+
+		break;
+	case 2:
+		font::textOut(2, "Press A(controller) or Z(keyboard)", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+
+
+		break;
+	case 3:
+		font::textOut(2, "Go to the right", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+
+
+		break;
+	case 4:
+		if (player.state == 0)
+		{
+
+
+			font::textOut(2, "Press R1(controller) or S(keyboard)", player.pos.x - 350, player.pos.y - 250, 1.0f, 1.0f, 0, 1, 1);
+
+			font::textOut(2, "to aim and Press A(controller) or ", player.pos.x - 350, player.pos.y - 200, 1.0f, 1.0f, 0, 1, 1);
+			font::textOut(2, "to use hook", player.pos.x - 350, player.pos.y - 150, 1.0f, 1.0f, 0, 1, 1);
+		}
+		break;
+	case 5:
+		font::textOut(2, "Press A(controller) or Z(keyboard)", player.pos.x - 500, player.pos.y -100, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "connect the xx to open the door)", player.pos.x - 500, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "Door", 1170,650, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "|", 1237, 680, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "V", 1230, 700, 1.0f, 1.0f, 0, 1, 1);
+		break;
+	case 6:
+		font::textOut(2, "Be careful guard will cut you \"connection\" ", player.pos.x - 500, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "close the door ", player.pos.x - 500, player.pos.y, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "Door", 1170, 650, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "|", 1237, 680, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "V", 1230, 700, 1.0f, 1.0f, 0, 1, 1);
+		break;
+	case 7:
+		
+		primitive::rect(0, 0, 1280, 960, 0, 0, 0, 0, 0, 0, 0.7);
+
+		int i;
+		int heart;
+		heart = 100;
+		for (i = 0; i < player.hp; i++)
+		{
+			primitive::circle(heart, 20, 20, 1, 0, 0);
+			heart += 50;
+		}
+
+		font::textOut(2, "If you are exposed to the guards,", 100, 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "drones and cameras", 100, 100, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "your escape times will be -1", 100, 150, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "Press A(controller) or Z(keyboard) ", 100, 250, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "to enjoy your game ", 100, 300, 1.0f, 1.0f, 0, 1, 1);
+		break;
+	case 8:
+
+		break;
+	default:
+		break;
+	}
+
 
 
 }

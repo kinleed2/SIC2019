@@ -75,16 +75,44 @@ void game_update()
 
     switch (game_state)
     {
-    case stage1set:
-        //////// 初期設定 ////////
+	case stage0set:
 
-        // スプライトのロード
-        sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
+		sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 		sprite_load(&sprHook, L"./Data/Images/hook.png");
 		sprite_load(&sprBg, L"./Data/Images/bg.png");
 		sprite_load(&sprEnemy, L"./Data/Images/enemy.png");
 		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
 		sprite_load(&sprMap, L"./Data/Images/map.png");
+
+		stage_0_init();
+
+		GameLib::setBlendMode(Blender::BS_ALPHA);
+
+		game_state++;
+		break;
+	
+
+	case stage0play:
+	
+		stage_0_update();
+
+		if (TRG(0) & PAD_TRG4)
+		{
+			game_state = stage1set;
+		}
+		break;
+
+	case stage0end:
+
+		Sleep(1000);
+		game_state++;
+		break;
+
+
+
+
+    case stage1set:
+        //////// 初期設定 ////////
 
 		//map_init();
 		//
@@ -113,13 +141,12 @@ void game_update()
 
         break;
 
-
 	case stage1end:
 		
 		Sleep(1000);
 		game_state++;
 		break;
-	
+
 	case stage2set:
 
 		stage_2_init();
@@ -240,13 +267,22 @@ void game_update()
 void game_draw()
 {
     // 画面を白で塗りつぶす
-    GameLib::clear(0, 0, 0);
+ 
+
+	
+	GameLib::clear(0, 0, 0);
 
 	map_draw();
 
 	enemy_draw();
 
 	player_draw();
+
+	if (game_state == stage0play)
+	{
+		stage_0_draw();
+	}
+
 
 	
 }

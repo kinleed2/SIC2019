@@ -16,5 +16,9 @@
 void player_init();
 void player_update();
 void player_draw();
+void player_move();
+void player_fall();
+void player_hook();
+void player_connect();
 
 #endif // !INCLUDED_PLAYER
