@@ -15,7 +15,6 @@ extern Sprite* sprBg;
 extern Sprite* sprEnemy;
 extern Sprite* sprEfc;
 extern Sprite* sprNumber;
-extern Sprite* sprHook;
 extern Sprite* sprEnemy2;
 extern Sprite* sprMap;
 //------< プロトタイプ宣言 >-----------------------------------------------------

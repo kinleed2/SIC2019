@@ -36,8 +36,10 @@ void title_init()
 //--------------------------------
 void title_update()
 {
+	
     switch (title_state)
     {
+
     case 0:
         //////// 初期設定 ////////
 
@@ -45,9 +47,13 @@ void title_update()
 		{
 			title_state++;
 		}
-        break;
 		
-    case 1:
+        break;
+	case 1:
+		music::play(0);
+		title_state++;
+		break;
+    case 2:
         //////// 通常時 ////////
         // キー入力でシーン切り替え
         if (TRG(0) & PAD_START)
@@ -55,10 +61,10 @@ void title_update()
             title_state++;
         }
         break;
-		music::play(0,TRUE);
+		
 
     // フェードアウト用のcase 2:をつくる
-    case 2:
+    case 3:
         //////// フェードアウト ////////
         fadeOut += 0.0167f;
         if (fadeOut >= 1.0f)
@@ -85,7 +91,7 @@ void title_draw()
 
 
 
-	if (title_timer <= 1000 || title_state ==0)
+	if (title_timer <= 1000 || title_state == 0)
 	{
 
 		
@@ -97,7 +103,7 @@ void title_draw()
 
 
 	}
-	if (title_state >= 1)
+	if (title_state >= 2)
 	{
 	
 		GameLib::clear(0, 0, 0);
@@ -125,5 +131,5 @@ void title_draw()
 void title_end()
 {
 
-
+	music::stop(0);
 }
