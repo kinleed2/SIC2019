@@ -68,7 +68,7 @@ void stage_2_init()
 
 	enemy_init();
 	enemy_guard_init(enemyGuard, 690, 800, left);
-	enemy_camera_init(enemyCamera, 860, 320, right, 0, 0, 0);
+	enemy_camera_init(enemyCamera, 860, 320, right, 40, 20, 0);
 	//enemy_guard_init(enemyGuard + 1, 100, 250, right);
 }
 
@@ -597,13 +597,20 @@ void stage_0_draw()
 		
 		primitive::rect(0, 0, 1280, 960, 0, 0, 0, 0, 0, 0, 0.7);
 
+		int hpPos;
+		hpPos = 50;
 		int i;
-		int heart;
-		heart = 100;
 		for (i = 0; i < player.hp; i++)
 		{
-			primitive::circle(heart, 20, 20, 1, 0, 0);
-			heart += 50;
+			sprite_render(player.data,                  // 使用するスプライト
+				hpPos, 0,             // 位置
+				1, 1,         // スケールv
+				1200, 0,       // 元画像位置
+				80, 80,     // 元画像大きさ
+				0, 0,   // 基準点の位置
+				0.0f,
+				1, 1, 1, 1);
+			hpPos += 100;
 		}
 
 		

@@ -87,16 +87,57 @@ void map_draw()
 					);
 				break;
 			case 2:
-				primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 0);
+				if (map[i][j].connectFlag == FALSE)
+				{
+					sprite_render(map[i][j].data,                  // 使用するスプライト
+						map[i][j].pos.x - 40, map[i][j].pos.y,             // 位置
+						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
+						0,40,    // 元画像位置
+						110,110,    // 元画像大きさ
+						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
+						0.0f,
+						1, 1, 1, 1
+						);
+				}
+				else
+				{
+					sprite_render(map[i][j].data,                  // 使用するスプライト
+						map[i][j].pos.x - 40, map[i][j].pos.y,             // 位置
+						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
+						110, 40,    // 元画像位置
+						110, 110,    // 元画像大きさ
+						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
+						0.0f,
+						1, 1, 1, 1
+						);
+
+
+				}
 				break;
 			case 3:
 				if (player.score == 1)
 				{
-					primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 0);
+					sprite_render(map[i][j].data,                  // 使用するスプライト
+						map[i][j].pos.x - 10, map[i][j].pos.y,             // 位置
+						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
+						90, 150,    // 元画像位置
+						90, 130,    // 元画像大きさ
+						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
+						0.0f,
+						1, 1, 1, 1
+						);
 				}
 				else
 				{
-					primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 0, 1, 1);
+					sprite_render(map[i][j].data,                  // 使用するスプライト
+						map[i][j].pos.x - 10, map[i][j].pos.y,             // 位置
+						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
+						0, 150,    // 元画像位置
+						90, 130,    // 元画像大きさ
+						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
+						0.0f,
+						1, 1, 1, 1
+						);
 				}
 				break;
 			case 4: 
@@ -110,7 +151,7 @@ void map_draw()
 			{
 				if (player.cnt == 1)
 				{
-					primitive::line(map[i][j].pos.x + 20 , map[i][j].pos.y + 40, player.pos.x + 40, player.pos.y + 70, 1, 1, 1, 1,3);
+					primitive::line(map[i][j].pos.x + 20 , map[i][j].pos.y + 20, player.pos.x + 40, player.pos.y + 70, 1, 1, 1, 1,3);
 				}
 				else
 				{
@@ -135,19 +176,10 @@ void map_draw()
 		font::textOut(2, "CLEAR", 40, 250, 1.3f, 1.3f, 0, 1, 1);
 	}
 
-
-	//HPの表示
-	int heart = 100;
-	for (i = 0; i < player.hp; i++)
-	{
-		primitive::circle(heart, 20, 20, 1, 0, 0);
-		heart += 50;
-	}
-
 	//連結前の画面処理
 	if (player.score !=1)
 	{
-		primitive::rect(0, 0, 1280, 960, 0, 0, 0, 0, 0, 0, 0.3);
+		primitive::rect(0, 0, 1280, 960, 0, 0, 0, 0, 0, 0, 0.2);
 	}
 	
 	//primitive::rect(0, 0, 1280, 960, 0, 0, 0, 1, 1, 1, 0.3);

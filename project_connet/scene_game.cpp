@@ -14,7 +14,6 @@ int game_state;     // 状態
 int game_timer;     // タイマー
 
 Sprite* sprPlayer;
-Sprite* sprHook;
 Sprite* sprBg;
 Sprite* sprEnemy;
 Sprite* sprEnemy2;
@@ -36,6 +35,8 @@ void game_init()
     game_timer = 0;
 
 	player.hp = 3;
+
+	music::play(0, TRUE);
 }
 
 //--------------------------------
@@ -78,7 +79,6 @@ void game_update()
 	case stage0set:
 
 		sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
-		sprite_load(&sprHook, L"./Data/Images/hook.png");
 		sprite_load(&sprBg, L"./Data/Images/bg.png");
 		sprite_load(&sprEnemy, L"./Data/Images/enemy.png");
 		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
@@ -300,7 +300,6 @@ void game_end()
 
     // スプライトの破棄 
     SAFE_DELETE(sprPlayer); // プレイヤースプライトの破棄
-	SAFE_DELETE(sprHook);
 	SAFE_DELETE(sprBg);
 	SAFE_DELETE(sprEnemy2);
 	SAFE_DELETE(sprEnemy);
