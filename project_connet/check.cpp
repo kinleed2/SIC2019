@@ -169,7 +169,7 @@ void check(int returnStage,int nextStage)
 		{
 			if (check_conncet() == TRUE
 				&& map[i][j].type == 3
-				&& player.pos.y + MAPCHIP_SIZE == map[i][j].pos.y
+				&& player.pos.y == map[i][j].pos.y
 				&& player.pos.x + 80 >= map[i][j].pos.x
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
