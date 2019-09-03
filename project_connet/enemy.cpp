@@ -272,7 +272,24 @@ void enemy_uav_move(OBJ2D *obj, int mode,int leftLimit, int rightLimit, int spee
 				obj->direction = left;
 			}
 			break;
-
+		}
+	case 3:
+			switch (obj->direction)
+			{
+			case up:
+				obj->pos.y -= speed;
+				if (obj->pos.y <= upLimit)
+				{
+					obj->direction = down;
+				}
+				break;
+			case down:
+				obj->pos.y += speed;
+				if (obj->pos.y >= downLimit)
+				{
+					obj->direction = up;
+				}
+				break;
 		default:
 			break;
 		}
