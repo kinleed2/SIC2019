@@ -316,7 +316,6 @@ void stage_0_init()
 
 	player_init();
 
-
 	enemy_init();
 
 	enemy_guard_init(enemyGuard, 1000, 800, left);
@@ -324,7 +323,6 @@ void stage_0_init()
 	player.guideState = 0;
 
 	player.timer = 0;
-
 
 	player.pos.x = 200;
 }
@@ -553,13 +551,14 @@ void stage_0_draw()
 
 		break;
 	case 1:
+
 		font::textOut(2, "Press ->", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
 
 
 		break;
 	case 2:
-		font::textOut(2, "Press A(controller) or Z(keyboard)", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
-
+		font::textOut(2, "Press A(controller) or Z(keyboard) ", player.pos.x - 30, player.pos.y - 100, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "to xxx", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
 
 		break;
 	case 3:
@@ -588,6 +587,8 @@ void stage_0_draw()
 	case 6:
 		font::textOut(2, "Be careful guard will cut you \"connection\" ", player.pos.x - 500, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
 		font::textOut(2, "close the door ", player.pos.x - 500, player.pos.y, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "If you are exposed to the guards,", player.pos.x - 500, player.pos.y + 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(2, "drones and cameras", player.pos.x - 500, player.pos.y + 100, 1.0f, 1.0f, 0, 1, 1);
 		font::textOut(2, "Door", 1170, 650, 1.0f, 1.0f, 0, 1, 1);
 		font::textOut(2, "|", 1237, 680, 1.0f, 1.0f, 0, 1, 1);
 		font::textOut(2, "V", 1230, 700, 1.0f, 1.0f, 0, 1, 1);
@@ -605,8 +606,7 @@ void stage_0_draw()
 			heart += 50;
 		}
 
-		font::textOut(2, "If you are exposed to the guards,", 100, 50, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "drones and cameras", 100, 100, 1.0f, 1.0f, 0, 1, 1);
+		
 		font::textOut(2, "your escape times will be -1", 100, 150, 1.0f, 1.0f, 0, 1, 1);
 		font::textOut(2, "Press A(controller) or Z(keyboard) ", 100, 250, 1.0f, 1.0f, 0, 1, 1);
 		font::textOut(2, "to enjoy your game ", 100, 300, 1.0f, 1.0f, 0, 1, 1);

@@ -57,6 +57,7 @@ struct OBJ2D
 	VECTOR2 hookPos;		//
 	BOOL	hookFlag;		//
 	BOOL    connectFlag;    //
+	int     guideState;
 };
 
 //------< プロトタイプ宣言 >-----------------------------------------------------

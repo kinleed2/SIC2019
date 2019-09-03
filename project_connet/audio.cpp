@@ -17,6 +17,12 @@ using namespace GameLib;
 //--------------------------------
 void audio_init()
 {
+	music::load(0, L"./Data/Musics/bgm_maoudamashii_8bit29.wav", 0.5f);
+
+
+	//Œø‰Ê‰¹‚Ì“Ç‚İ‚İ
+	//sound::load(L"./Data/Sounds/Shooting.xmb");
+
 }
 
 //--------------------------------

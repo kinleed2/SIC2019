@@ -41,12 +41,12 @@ void title_update()
     case 0:
         //////// 初期設定 ////////
 
-		if (TRG(0) & PAD_START)
+		if (TRG(0) & PAD_START || title_timer == 1000)
 		{
 			title_state++;
 		}
         break;
-
+		
     case 1:
         //////// 通常時 ////////
         // キー入力でシーン切り替え
@@ -55,6 +55,7 @@ void title_update()
             title_state++;
         }
         break;
+		music::play(0,TRUE);
 
     // フェードアウト用のcase 2:をつくる
     case 2:
@@ -84,13 +85,13 @@ void title_draw()
 
 
 
-	if (title_timer <= 1500 || title_state ==0)
+	if (title_timer <= 1000 || title_state ==0)
 	{
 
 		
 
 	font::textOut(2, "present", 40, 250, 1.3f, 1.3f, 0, 1, 1, showPresent);
-	showPresent += 0.001f;
+	showPresent += 0.003f;
 	
 
 
