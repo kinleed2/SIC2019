@@ -17,7 +17,9 @@ using namespace GameLib;
 //--------------------------------
 void audio_init()
 {
-	music::load(0, L"./Data/Musics/bgm1.wav", 0.5f);
+	music::load(0, L"./Data/Musics/bgm1.wav", 0.3f);
+	sound::load(L"./Data/Sounds/sound.xwb");
+
 
 
 	//Œø‰Ê‰¹‚Ì“Ç‚İ‚İ

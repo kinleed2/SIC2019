@@ -353,6 +353,7 @@ void enemy_camera_move(OBJ2D *obj, int mode, int leftLimit, int rightLimit, int 
 			if (obj->pos.x <= leftLimit)
 			{
 				obj->direction = right;
+				sound::play(6);
 			}
 			break;
 		case right:
@@ -360,6 +361,7 @@ void enemy_camera_move(OBJ2D *obj, int mode, int leftLimit, int rightLimit, int 
 			if (obj->pos.x >= rightLimit)
 			{
 				obj->direction = left;
+				sound::play(6);
 			}
 			break;
 		default:

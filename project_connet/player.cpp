@@ -36,6 +36,7 @@ void player_update()
 	if (player.exist == FALSE)
 	{
 		//player.anime = 0;
+		sound::play(8);
 		player_fall();
 
 		player.anime = player.timer / 64 % 4;
@@ -75,13 +76,6 @@ void player_update()
 
 void player_draw()
 {
-
-
-
-
-
-
-
 	//primitive::rect(player.pos.x + 15, player.pos.y + 30, 50, 50, 0, 1, 0, 0, 1);
 
 	if (player.exist == TRUE)
@@ -184,8 +178,8 @@ void player_draw()
 
 
 debug::setString("player.hp:%d", player.hp);
-	debug::setString("player.score:%d", player.score);
-//debug::setString("player.cnt:%d",);
+debug::setString("player.score:%d", player.score);
+debug::setString("player.cnt:%d", player.cnt);
 debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
 debug::setString("player.anime:%d", player.anime);
@@ -196,6 +190,7 @@ debug::setString("player.hook:%d", hook);
 
 void player_move()
 {
+
 	if (player.state == 0)
 	{
 		//‰E‚ÉˆÚ“®‚·‚é
@@ -206,12 +201,15 @@ void player_move()
 			if (player.speed.x < 5 && player.timer % 2 == 0)
 			{
 				player.speed.x++;
+				
 			}
+			
 		}
 		//ŠŠ‚é
 		else if (player.speed.x > 0 && player.timer % 2 == 0)
 		{
 			player.speed.x--;
+
 
 		}
 		//¶‚ÉˆÚ“®‚·‚é
@@ -222,6 +220,7 @@ void player_move()
 			if (player.speed.x > -5 && player.timer % 2 == 0)
 			{
 				player.speed.x--;
+				
 			}
 
 		}
@@ -232,12 +231,17 @@ void player_move()
 		}
 
 		player.pos.x += player.speed.x;
+		//if (player.speed.x ==1)
+		//{
+		//	sound::play(1);
+		//}
 
 		if (STATE(0) & PAD_UP)
 		{
 			player.direction = up;
-
+			
 		}
+		
 	}
 
 
@@ -253,7 +257,6 @@ void player_move()
 		if (player.direction == right)
 		{
 			player.texPos.y = right;
-
 		}
 		if (player.direction == left)
 		{
@@ -268,6 +271,8 @@ void player_move()
 			player.anime = player.timer / 25 % 2;
 		}
 	}
+	
+
 
 
 
@@ -310,6 +315,7 @@ void player_hook()
 					if (STATE(0) & PAD_R1)
 					{
 						player.hookFlag = TRUE;
+						
 					}
 
 
@@ -341,9 +347,11 @@ void player_hook()
 				break;
 			}
 			player.speed.y = -5;
+			sound::play(0);
 		}
 		//player.pos.x = player.hookPos.x;
 		//player.pos.y = player.hookPos.y - PL_HEIGHT;
+		
 	}
 	if (player.state == 1)
 	{
@@ -401,6 +409,17 @@ void player_connect()
 				{
 					map[i][j].connectFlag = TRUE;
 					player.cnt++;
+					sound::play(5);
+					if (player.cnt == 2)
+					{
+						player.cnt++;
+						if (player.cnt == 3)
+						{
+							sound::play(2);
+						}
+					}
+					
+
 				}
 			}
 		}
@@ -411,6 +430,7 @@ void player_connect()
 void player_fall()
 {
 	player.groundFlag = FALSE;
+
 	int i, j;
 	for (i = 0; i < 24; i++)
 	{
