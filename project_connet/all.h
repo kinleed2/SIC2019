@@ -30,6 +30,7 @@ using namespace input;      // –{—ˆƒwƒbƒ_‚É‘‚­‚×‚«‚Å‚Í‚È‚¢iŠwK‚µ‚â‚·‚³‚ğ—Dæ
 #include "check.h"
 #include "enemy.h"
 #include "stage.h"
+#include "ending.h"
 
 //******************************************************************************
 #endif // !INCLUDED_ALL

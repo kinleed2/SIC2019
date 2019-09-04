@@ -93,6 +93,7 @@ void check_enemy_guard()
 				for (j = 0; j < 32; j++)
 				{
 					map[i][j].connectFlag = FALSE;
+					map[i][j].state = 0;
 				}
 			}
 		}
@@ -171,6 +172,7 @@ void check(int returnStage,int nextStage)
 	{
 		for ( j = 0; j < 32; j++)
 		{
+
 			if (check_conncet() == TRUE
 				&& map[i][j].type == 3
 				&& player.pos.y == map[i][j].pos.y
@@ -179,9 +181,14 @@ void check(int returnStage,int nextStage)
 			{
 				player.anime = 0;
 				player.speed = VECTOR2(0, 0);
-
 				game_state = nextStage;
 			}
+
+			if (map[i][j].type == 4 && map[i][j].state == 2)
+			{
+				player.atk = 1;
+			}
+
 
 		}
 	}
