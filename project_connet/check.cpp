@@ -158,6 +158,7 @@ void check(int returnStage,int nextStage)
 
 	if (player.state == 2)
 	{
+		
 		game_state = returnStage;
 	}
 

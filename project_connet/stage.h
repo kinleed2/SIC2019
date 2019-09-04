@@ -28,6 +28,8 @@ void stage_4_init();
 void stage_4_update();
 void stage_5_init();
 void stage_5_update();
+void stage_6_init();
+void stage_6_update();
 
 int stage_end(int stage);
 void stage_end_draw(int stage);
