@@ -83,7 +83,9 @@ void game_update()
 		sprite_load(&sprEnemy, L"./Data/Images/enemy.png");
 		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
 		sprite_load(&sprMap, L"./Data/Images/map.png");
-
+		sprite_load(&sprMap2, L"./Data/Images/map2.png");
+		sprite_load(&sprItem, L"./Data/Images/item.png");
+		sprite_load(&sprItem2, L"./Data/Images/item2.png");
 		stage_0_init();
 
 		GameLib::setBlendMode(Blender::BS_ALPHA);
@@ -322,5 +324,7 @@ void game_end()
 	SAFE_DELETE(sprEnemy2);
 	SAFE_DELETE(sprEnemy);
 	SAFE_DELETE(sprMap);
-	
+	SAFE_DELETE(sprMap2);
+	SAFE_DELETE(sprItem);
+	SAFE_DELETE(sprItem2);
 }		
