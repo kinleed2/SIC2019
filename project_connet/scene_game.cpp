@@ -87,8 +87,8 @@ void game_update()
 		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
 		sprite_load(&sprMap, L"./Data/Images/map.png");
 		sprite_load(&sprMap2, L"./Data/Images/map2.png");
-		//sprite_load(&sprItem, L"./Data/Images/item.png");
-		//sprite_load(&sprItem2, L"./Data/Images/item2.png");
+		sprite_load(&sprItem, L"./Data/Images/item.png");
+		sprite_load(&sprItem2, L"./Data/Images/item2.png");
 
 		stage_0_init();
 
@@ -335,5 +335,6 @@ void game_end()
 	SAFE_DELETE(sprMap2);
 	SAFE_DELETE(sprItem);
 	SAFE_DELETE(sprItem2);
-	
+
+
 }		
