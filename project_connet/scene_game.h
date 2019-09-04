@@ -17,6 +17,9 @@ extern Sprite* sprEfc;
 extern Sprite* sprNumber;
 extern Sprite* sprEnemy2;
 extern Sprite* sprMap;
+extern Sprite* sprMap2;
+extern Sprite* sprItem;
+extern Sprite* sprItem2;
 //------< プロトタイプ宣言 >-----------------------------------------------------
 void game_init();
 void game_update();

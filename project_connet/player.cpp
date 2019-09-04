@@ -102,7 +102,7 @@ void player_draw()
 		sprite_render(sprItem,                  // 使用するスプライト
 			player.hookPos.x, player.hookPos.y,             // 位置
 			1, 1,         // スケールv
-			0,120 + 60,       // 元画像位置
+			0,	60,       // 元画像位置
 			40, 40,     // 元画像大きさ
 			0, 0,   // 基準点の位置
 			0.0f,
@@ -119,7 +119,7 @@ void player_draw()
 		sprite_render(sprItem,                  // 使用するスプライト
 			player.hookPos.x + 20 , player.hookPos.y + 20,             // 位置
 			1,1 ,         // スケールv
-			0,120,      // 元画像位置
+			0,0,      // 元画像位置
 			60,60,   // 元画像大きさ
 			30,30,   // 基準点の位置
 			0,
@@ -145,10 +145,10 @@ void player_draw()
 	int i;
 	for (i = 0; i < player.hp; i++)
 	{
-		sprite_render(player.data,                  // 使用するスプライト
+		sprite_render(sprItem,                  // 使用するスプライト
 			hpPos, 0,             // 位置
 			1, 1,         // スケールv
-			1200, 0,       // 元画像位置
+			60, 0,       // 元画像位置
 			80, 80,     // 元画像大きさ
 			0, 0,   // 基準点の位置
 			0.0f,
@@ -161,7 +161,7 @@ void player_draw()
 	{
 		if (player.state == 0 || player.state == 1)
 		{
-			sprite_render(sprItem,                  // 使用するスプライト
+			sprite_render(sprItem2,                  // 使用するスプライト
 				player.pos.x - 80, player.pos.y,             // 位置
 				1, 1,         // スケールv
 				0 + player.anime * 240, 0,       // 元画像位置

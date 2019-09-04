@@ -86,10 +86,10 @@ void enemy_draw()
 
 			if (enemyGuard[i].atk == 1)
 			{
-				sprite_render(player.data,                  // 使用するスプライト
+				sprite_render(sprItem,                  // 使用するスプライト
 					enemyGuard[i].pos.x , enemyGuard[i].pos.y - 70,             // 位置
 					enemyGuard[i].scale.x, enemyGuard[i].scale.y,         // スケールv
-					1240,80,      // 元画像位置
+					140,0,      // 元画像位置
 					40,80,     // 元画像大きさ
 					0,0,   // 基準点の位置
 					0,
@@ -125,10 +125,10 @@ void enemy_draw()
 
 			if (enemyUav[i].atk == 1)
 			{
-				sprite_render(player.data,                  // 使用するスプライト
+				sprite_render(sprItem,                  // 使用するスプライト
 					enemyUav[i].pos.x + 10, enemyUav[i].pos.y - 70,             // 位置
 					enemyUav[i].scale.x, enemyUav[i].scale.y,         // スケールv
-					1240, 80,      // 元画像位置
+					140, 0,      // 元画像位置
 					40, 80,     // 元画像大きさ
 					0, 0,   // 基準点の位置
 					0,
@@ -170,10 +170,10 @@ void enemy_draw()
 
 			if (enemyCamera[i].atk == 1)
 			{
-				sprite_render(player.data,                  // 使用するスプライト
+				sprite_render(sprItem,                  // 使用するスプライト
 					enemyCamera[i].rpos.x - 20, enemyCamera[i].rpos.y - 100,             // 位置
 					enemyCamera[i].scale.x, enemyCamera[i].scale.y,         // スケールv
-					1240, 80,      // 元画像位置
+					140, 0,      // 元画像位置
 					40, 80,     // 元画像大きさ
 					0, 0,   // 基準点の位置
 					0,
