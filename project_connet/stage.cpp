@@ -104,7 +104,7 @@ void stage_2_update()
 	//マップチップ更新
 	map_update(stage2);
 	//敵の移動
-	enemy_guard_move(enemyGuard, 40, 1200, 2);
+	enemy_guard_move(enemyGuard, 40, 1100, 1);
 	enemy_camera_move(enemyCamera, 1, 680, 960, 1 ,0 ,0);
 	//enemy_guard_move(enemyGuard + 1, 100, 900, 10);
 
@@ -127,7 +127,7 @@ void stage_3_init()
 	//enemy_guard_init(enemyGuard + 1, 1200, 800, right);
 	enemy_camera_init(enemyCamera, 300, 760, left, 0, 0, 0);
 	//enemy_camera_init(enemyCamera + 1, 1100, 360, up, 160, 0, 90);
-	enemy_uav_init(enemyUav, 400, 160, left);
+	enemy_uav_init(enemyUav, 400, 220, left);
 	enemy_uav_init(enemyUav + 1, 1100, 360, down);
 
 	//enemy_guard_init(enemyGuard + 1, 100, 250, right);
@@ -164,12 +164,12 @@ void stage_3_update()
 	//マップチップ更新
 	map_update(stage3);
 	//敵の移動
-	enemy_guard_move(enemyGuard, 560, 880, 2);
+	enemy_guard_move(enemyGuard, 300, 880, 1);
 	//enemy_guard_move(enemyGuard + 1, 880, 1200, 1);
 	enemy_camera_move(enemyCamera, 1, 120, 400, 1, 0, 0);
 	//enemy_camera_move(enemyCamera + 1 , 2, 0, 0, 1, 200, 480);
 	enemy_uav_move(enemyUav, 1, 400, 840, 1, 0, 0);
-	enemy_uav_move(enemyUav + 1, 2, 0, 0, 1, 200, 480);
+	enemy_uav_move(enemyUav + 1, 2, 0, 0, 1, 120, 480);
 
 	//enemy_guard_move(enemyGuard + 1, 100, 900, 10);
 
@@ -189,8 +189,8 @@ void stage_4_init()
 
 
 	enemy_init();
-	enemy_guard_init(enemyGuard, 760, 800, right);
-	enemy_guard_init(enemyGuard + 1, 840, 800, left);
+	enemy_guard_init(enemyGuard, 640, 800, right);
+	enemy_guard_init(enemyGuard + 1, 800, 800, left);
 	enemy_camera_init(enemyCamera, 400, 400, left, -10, -20, 0);
 	enemy_camera_init(enemyCamera + 1, 240, 760, 0, 60, -10, 0);
 	enemy_uav_init(enemyUav, 40, 200, right);
@@ -230,12 +230,12 @@ void stage_4_update()
 	//マップチップ更新
 	map_update(stage4);
 	//敵の移動
-	enemy_guard_move(enemyGuard, 400, 1200, 1);
-	enemy_guard_move(enemyGuard + 1, 400, 1200, 1);
+	enemy_guard_move(enemyGuard, 300, 1100, 1);
+	enemy_guard_move(enemyGuard + 1, 300, 1100, 1);
 	enemy_camera_move(enemyCamera, 1, 120, 440, 1, 0, 0);
 	enemy_camera_move(enemyCamera + 1, 1, 760, 340, 0, 0, 0);
 	enemy_uav_move(enemyUav, 1, 80, 600, 1, 0, 0);
-	enemy_uav_move(enemyUav + 1, 1, 560, 1160, 1, 0, 0);
+	enemy_uav_move(enemyUav + 1, 1, 600, 1160, 1, 0, 0);
 
 	//enemy_guard_move(enemyGuard + 1, 100, 900, 10);
 
@@ -300,7 +300,7 @@ void stage_5_update()
 	enemy_guard_move(enemyGuard + 2, 680, 1100, 1);
 	//enemy_camera_move(enemyCamera, 1, 120, 440, 1, 0, 0);h
 	//enemy_camera_move(enemyCamera + 1, 1, 760, 340, 0, 0, 0);
-	enemy_uav_move(enemyUav, 2, 80, 480, 2, 320, 680);
+	enemy_uav_move(enemyUav, 2, 80, 480, 1, 320, 680);
 	enemy_uav_move(enemyUav + 1, 1, 400, 680, 1, 0, 0);
 
 	player_update();
@@ -517,7 +517,8 @@ void stage_0_update()
 
 		if (player.score == 1)
 		{
-			player_fall();
+			
+			player.anime = 0;
 			enemy_guard_init(enemyGuard, 1000, 800, left);
 			player.guideState++;
 		}
@@ -529,7 +530,6 @@ void stage_0_update()
 
 		if (player.score == 0)
 		{
-			Sleep(500);
 			player.guideState++;
 		}
 
