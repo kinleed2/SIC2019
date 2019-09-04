@@ -35,7 +35,7 @@ void game_init()
     game_timer = 0;
 
 	player.hp = 3;
-
+	player.guideState = 0;
 	music::play(0, TRUE);
 }
 
@@ -98,14 +98,13 @@ void game_update()
 
 		if (TRG(0) & PAD_TRG4)
 		{
-			game_state = stage1set;
+			game_state = stage0end;
 		}
 		break;
 
 	case stage0end:
 
-		Sleep(1000);
-		game_state++;
+		game_state = stage_end(game_state);
 		break;
 
 
@@ -143,8 +142,7 @@ void game_update()
 
 	case stage1end:
 		
-		Sleep(1000);
-		game_state++;
+		game_state = stage_end(game_state);
 		break;
 
 	case stage2set:
@@ -169,8 +167,7 @@ void game_update()
 
 	case stage2end:
 
-		Sleep(1000);
-		game_state++;
+		game_state = stage_end(game_state);
 		break;
 
 	case stage3set:
@@ -196,8 +193,7 @@ void game_update()
 
 	case stage3end:
 
-		Sleep(1000);
-		game_state++;
+		game_state = stage_end(game_state);
 		break;
 
 	case stage4set:
@@ -223,8 +219,7 @@ void game_update()
 
 	case stage4end:
 
-		Sleep(1000);
-		game_state++;
+		game_state = stage_end(game_state);
 		break;
 
 	case stage5set:
@@ -259,6 +254,7 @@ void game_update()
 
 
 	debug::setString("game_timer:%d", game_timer);
+	debug::setString("game_state:%d", game_state);
 }
 
 //--------------------------------
@@ -266,25 +262,20 @@ void game_update()
 //--------------------------------
 void game_draw()
 {
-    // ‰æ–Ê‚ð”’‚Å“h‚è‚Â‚Ô‚·
- 
-
-	
 	GameLib::clear(0, 0, 0);
 
+    // ‰æ–Ê‚ð”’‚Å“h‚è‚Â‚Ô‚·
+ 
 	map_draw();
 
 	enemy_draw();
+	
+	
+	if (game_state == stage0play) stage_0_draw();
 
 	player_draw();
 
-	if (game_state == stage0play)
-	{
-		stage_0_draw();
-	}
-
-
-	
+	if (game_state  % 3 == 2) stage_end_draw(game_state);
 }
 
 //--------------------------------

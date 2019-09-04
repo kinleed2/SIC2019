@@ -320,13 +320,22 @@ void stage_0_init()
 
 	enemy_init();
 
-	enemy_guard_init(enemyGuard, 1000, 800, left);
-
-	player.guideState = 0;
+	
+	if (player.guideState < 8)
+	{
+		player.guideState = 0;
+	}
+	else
+	{
+		enemy_guard_init(enemyGuard, 1000, 800, left);
+	}
 
 	player.timer = 0;
 
 	player.pos.x = 200;
+
+
+
 }
 
 
@@ -393,7 +402,7 @@ void stage_0_update()
 			player.guideState++;
 		}
 
-		if (player.type == 0)
+		if (player.state == 0)
 		{
 			player.anime = 0;
 
@@ -508,6 +517,8 @@ void stage_0_update()
 
 		if (player.score == 1)
 		{
+			player_fall();
+			enemy_guard_init(enemyGuard, 1000, 800, left);
 			player.guideState++;
 		}
 		break;
@@ -526,6 +537,8 @@ void stage_0_update()
 	case 7:
 		if (STATE (0) & PAD_TRG1)
 		{
+			player.exist = TRUE;
+			player.state = 0;
 			player.guideState++;
 		}
 		break;
@@ -548,23 +561,23 @@ void stage_0_draw()
 	{
 	case 0:
 		primitive::rect(player.pos.x - 50, player.pos.y - 80, 250, 80, 0, 0, 0, 1, 1, 1, 1);
-		font::textOut(2, "Press <-", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 0, 0);
+		font::textOut(4, "Press <-", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 0, 0);
 
 
 		break;
 	case 1:
 
-		font::textOut(2, "Press ->", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Press ->", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
 
 
 		break;
 	case 2:
-		font::textOut(2, "Press A(controller) or Z(keyboard) ", player.pos.x - 30, player.pos.y - 100, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "to xxx", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Press A(controller) or Z(keyboard) ", player.pos.x - 30, player.pos.y - 100, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "to xxx", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
 
 		break;
 	case 3:
-		font::textOut(2, "Go to the right", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Go to the right", player.pos.x - 30, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
 
 
 		break;
@@ -573,27 +586,27 @@ void stage_0_draw()
 		{
 
 
-			font::textOut(2, "Press R1(controller) or S(keyboard)", player.pos.x - 350, player.pos.y - 250, 1.0f, 1.0f, 0, 1, 1);
+			font::textOut(4, "Press R1(controller) or S(keyboard)", player.pos.x - 350, player.pos.y - 250, 1.0f, 1.0f, 0, 1, 1);
 
-			font::textOut(2, "to aim and Press A(controller) or ", player.pos.x - 350, player.pos.y - 200, 1.0f, 1.0f, 0, 1, 1);
-			font::textOut(2, "to use hook", player.pos.x - 350, player.pos.y - 150, 1.0f, 1.0f, 0, 1, 1);
+			font::textOut(4, "to aim and Press A(controller) or ", player.pos.x - 350, player.pos.y - 200, 1.0f, 1.0f, 0, 1, 1);
+			font::textOut(4, "to use hook", player.pos.x - 350, player.pos.y - 150, 1.0f, 1.0f, 0, 1, 1);
 		}
 		break;
 	case 5:
-		font::textOut(2, "Press A(controller) or Z(keyboard)", player.pos.x - 500, player.pos.y -100, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "connect the xx to open the door)", player.pos.x - 500, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "Door", 1170,650, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "|", 1237, 680, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "V", 1230, 700, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Press A(controller) or Z(keyboard)", player.pos.x - 500, player.pos.y -100, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "connect the xx to open the door)", player.pos.x - 500, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Door", 1170,650, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "|", 1237, 680, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "V", 1230, 700, 1.0f, 1.0f, 0, 1, 1);
 		break;
 	case 6:
-		font::textOut(2, "Be careful guard will cut you \"connection\" ", player.pos.x - 500, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "close the door ", player.pos.x - 500, player.pos.y, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "If you are exposed to the guards,", player.pos.x - 500, player.pos.y + 50, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "drones and cameras", player.pos.x - 500, player.pos.y + 100, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "Door", 1170, 650, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "|", 1237, 680, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "V", 1230, 700, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Be careful guard will cut you \"connection\" ", player.pos.x - 500, player.pos.y - 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "close the door ", player.pos.x - 500, player.pos.y, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "If you are exposed to the guards,", player.pos.x - 500, player.pos.y + 50, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "drones and cameras", player.pos.x - 500, player.pos.y + 100, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Door", 1170, 650, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "|", 1237, 680, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "V", 1230, 700, 1.0f, 1.0f, 0, 1, 1);
 		break;
 	case 7:
 		
@@ -616,9 +629,9 @@ void stage_0_draw()
 		}
 
 		
-		font::textOut(2, "your escape times will be -1", 100, 150, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "Press A(controller) or Z(keyboard) ", 100, 250, 1.0f, 1.0f, 0, 1, 1);
-		font::textOut(2, "to enjoy your game ", 100, 300, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "your escape times will be -1", 100, 150, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "Press A(controller) or Z(keyboard) ", 100, 250, 1.0f, 1.0f, 0, 1, 1);
+		font::textOut(4, "to enjoy your game ", 100, 300, 1.0f, 1.0f, 0, 1, 1);
 		break;
 	case 8:
 
@@ -627,6 +640,73 @@ void stage_0_draw()
 		break;
 	}
 
+	
 
+}
+
+
+int stage_end(int stage)
+{
+
+
+	int stageEnd[24][32] =
+	  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	};
+	//マップチップ更新
+	map_update(stageEnd);
+
+
+	player.direction = right;
+	
+	if (player.speed.x == 0)
+	{
+		player.pos = VECTOR2(640 - 40, 480 - 40);
+	}
+	player.anime = 2 + player.timer / 10 % 7;
+
+	player.timer++;
+
+	if (TRG(0) & PAD_TRG1)
+	{
+		player.speed.x = 5;
+	}
+
+	player.pos.x += player.speed.x;
+
+	if (player.pos.x >= 1280) stage++;
+
+	return stage;
+}
+
+void stage_end_draw(int stage)
+{
+	
+	font::textOut(4, "CLEAR!!", 500, 250, 2.0f, 2.0f, 1, 1, 0);
+	font::textOut(4, "Press A(controller) or Z(keyboard) ", 40, 600, 1.5f, 1.5f, 1, 1, 1);
+	font::textOut(4, "to next stage", 40, 650, 1.5f, 1.5f, 1, 1, 1);
+	
 
 }

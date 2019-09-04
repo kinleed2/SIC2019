@@ -6,7 +6,6 @@ extern OBJ2D map[24][32];
 
 void player_init()
 {
-
 	player.data = sprPlayer;
 	player.texPivot = VECTOR2(0, 0);
 	player.texSize = VECTOR2(80, 120);
@@ -22,6 +21,8 @@ void player_init()
 	player.score = 0;
 	player.exist = TRUE;
 	player.state = 0;
+
+	player.speed = VECTOR2(0, 0);
 }
 
 void player_update()
@@ -47,7 +48,6 @@ void player_update()
 	}
 	else
 	{
-
 
 		player_move();
 
@@ -115,6 +115,7 @@ void player_draw()
 			);
 	}
 	
+
 	int hook = 0;
 
 	if (player.state == 1 && player.pos.y >= player.hookPos.y + 30)
@@ -163,7 +164,7 @@ void player_draw()
 
 	if (player.exist == FALSE)
 	{
-		if (player.hookFlag == FALSE)
+		if (player.state == 0)
 		{
 			sprite_render(player.data,                  // 使用するスプライト
 				player.pos.x - 80, player.pos.y,             // 位置
@@ -176,7 +177,7 @@ void player_draw()
 				);
 		}
 
-		else if (player.hookFlag == TRUE)
+		else if (player.state == 1)
 		{
 			sprite_render(player.data,                  // 使用するスプライト
 				player.hookPos.x - 80, player.hookPos.y - 120,             // 位置
@@ -194,9 +195,9 @@ void player_draw()
 
 
 //debug::setString("player.hp:%d", player.hp);
-//debug::setString("player.score:%d", player.score);
-//debug::setString("player.cnt:%d", player.cnt);
-//debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
+	debug::setString("player.score:%d", player.score);
+//debug::setString("player.cnt:%d",);
+debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 //debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
 //debug::setString("player.anime:%d", player.anime);
 //debug::setString("player.hook:%d", hook);
@@ -219,7 +220,7 @@ void player_move()
 			}
 		}
 		//滑る
-		else if (player.speed.x > 0 && player.timer % 1 == 0)
+		else if (player.speed.x > 0 && player.timer % 2 == 0)
 		{
 			player.speed.x--;
 
@@ -236,7 +237,7 @@ void player_move()
 
 		}
 		//滑る
-		else if (player.speed.x < 0 && player.timer % 1 == 0)
+		else if (player.speed.x < 0 && player.timer % 2 == 0)
 		{
 			player.speed.x++;
 		}
@@ -314,8 +315,8 @@ void player_hook()
 				if (map[i][j].type == 1
 					&& player.hookPos.y + 2 * MAPCHIP_SIZE >= map[i][j].pos.y
 					&& player.hookPos.y <= map[i][j].pos.y
-					&& player.hookPos.x >= map[i][j].pos.x
-					&& player.hookPos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
+					&& player.hookPos.x >= map[i][j].pos.x - 20
+					&& player.hookPos.x <= map[i][j].pos.x + 20)
 				{
 					if (STATE(0) & PAD_R1)
 					{

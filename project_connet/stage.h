@@ -16,6 +16,8 @@ void stage_0_init();
 void stage_0_update();
 void stage_0_draw();
 
+
+
 void stage_1_init();
 void stage_1_update();
 void stage_2_init();
@@ -27,6 +29,7 @@ void stage_4_update();
 void stage_5_init();
 void stage_5_update();
 
-
+int stage_end(int stage);
+void stage_end_draw(int stage);
 
 #endif // !INCLUDED_STAGE

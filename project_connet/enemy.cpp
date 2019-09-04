@@ -47,10 +47,10 @@ void enemy_draw()
 
 			if (enemyGuard[i].direction == right)
 			{
-				enemyAtk[0] = { enemyGuard[i].pos.x + 80, enemyGuard[i].pos.y + 75};
-				enemyAtk[1] = { enemyGuard[i].pos.x + 80, enemyGuard[i].pos.y + 75 };
-				enemyAtk[2] = { enemyGuard[i].pos.x + 80 + 100, enemyGuard[i].pos.y };
-				enemyAtk[3] = { enemyGuard[i].pos.x + 80 + 100, enemyGuard[i].pos.y + 120 };
+				enemyAtk[0] = { enemyGuard[i].pos.x + 80, enemyGuard[i].pos.y + 77};
+				enemyAtk[1] = { enemyGuard[i].pos.x + 80, enemyGuard[i].pos.y + 77 };
+				enemyAtk[2] = { enemyGuard[i].pos.x + 80 + 120, enemyGuard[i].pos.y };
+				enemyAtk[3] = { enemyGuard[i].pos.x + 80 + 120, enemyGuard[i].pos.y + 120 };
 
 				
 
@@ -59,10 +59,10 @@ void enemy_draw()
 			}
 			else
 			{
-				enemyAtk[0] = { enemyGuard[i].pos.x , enemyGuard[i].pos.y + 75 };
-				enemyAtk[1] = { enemyGuard[i].pos.x , enemyGuard[i].pos.y + 75 };
-				enemyAtk[2] = { enemyGuard[i].pos.x - 100, enemyGuard[i].pos.y };
-				enemyAtk[3] = { enemyGuard[i].pos.x - 100, enemyGuard[i].pos.y + 120 };
+				enemyAtk[0] = { enemyGuard[i].pos.x , enemyGuard[i].pos.y + 77 };
+				enemyAtk[1] = { enemyGuard[i].pos.x , enemyGuard[i].pos.y + 77 };
+				enemyAtk[2] = { enemyGuard[i].pos.x - 120, enemyGuard[i].pos.y };
+				enemyAtk[3] = { enemyGuard[i].pos.x - 120, enemyGuard[i].pos.y + 120 };
 
 				
 				//primitive::rect(enemyGuard[i].pos.x - 95, enemyGuard[i].pos.y, 100, 120, 0, 0, 0, 1, 1, 0, 0.7);
@@ -117,8 +117,8 @@ void enemy_draw()
 
 			enemyAtk[0] = { enemyCamera[i].rpos.x, enemyCamera[i].rpos.y };
 			enemyAtk[1] = { enemyCamera[i].rpos.x, enemyCamera[i].rpos.y };
-			enemyAtk[2] = { enemyCamera[i].pos.x + 160, enemyCamera[i].pos.y + 160 };
-			enemyAtk[3]	= { enemyCamera[i].pos.x, enemyCamera[i].pos.y + 160 };
+			enemyAtk[2] = { enemyCamera[i].pos.x + 190, enemyCamera[i].pos.y + 160 };
+			enemyAtk[3]	= { enemyCamera[i].pos.x - 30, enemyCamera[i].pos.y + 160 };
 
 
 

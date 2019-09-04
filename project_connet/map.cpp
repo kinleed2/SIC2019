@@ -56,16 +56,19 @@ void map_draw()
 {
 
 
-
-	sprite_render(sprBg,                  // 使用するスプライト
-		0,0,             // 位置
-		1, 1,         // スケールv
-		0, 0,      // 元画像位置
-		1280, 960,   // 元画像大きさ
-		0, 0,   // 基準点の位置
-		0.0f,
-		1, 1, 1, 1
-		);
+	if (game_state % 3 != 2)
+	{
+		sprite_render(sprBg,                  // 使用するスプライト
+			0, 0,             // 位置
+			1, 1,         // スケールv
+			0, 0,      // 元画像位置
+			1280, 960,   // 元画像大きさ
+			0, 0,   // 基準点の位置
+			0.0f,
+			1, 1, 1, 1
+			);
+	}
+	
 
 	
 	int i, j, k = 0;
@@ -90,10 +93,10 @@ void map_draw()
 				if (map[i][j].connectFlag == FALSE)
 				{
 					sprite_render(map[i][j].data,                  // 使用するスプライト
-						map[i][j].pos.x - 40, map[i][j].pos.y,             // 位置
+						map[i][j].pos.x - 40, map[i][j].pos.y - 30,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
 						0,40,    // 元画像位置
-						110,110,    // 元画像大きさ
+						118,110,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
@@ -102,10 +105,10 @@ void map_draw()
 				else
 				{
 					sprite_render(map[i][j].data,                  // 使用するスプライト
-						map[i][j].pos.x - 40, map[i][j].pos.y,             // 位置
+						map[i][j].pos.x - 40, map[i][j].pos.y -30,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
-						110, 40,    // 元画像位置
-						110, 110,    // 元画像大きさ
+						118, 40,    // 元画像位置
+						118, 110,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
@@ -118,10 +121,10 @@ void map_draw()
 				if (player.score == 1)
 				{
 					sprite_render(map[i][j].data,                  // 使用するスプライト
-						map[i][j].pos.x - 10, map[i][j].pos.y,             // 位置
+						map[i][j].pos.x - 60, map[i][j].pos.y -20 ,          // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
-						90, 150,    // 元画像位置
-						90, 130,    // 元画像大きさ
+						140, 150,    // 元画像位置
+						140, 140,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
@@ -130,10 +133,10 @@ void map_draw()
 				else
 				{
 					sprite_render(map[i][j].data,                  // 使用するスプライト
-						map[i][j].pos.x - 10, map[i][j].pos.y,             // 位置
+						map[i][j].pos.x - 60, map[i][j].pos.y -20,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
 						0, 150,    // 元画像位置
-						90, 130,    // 元画像大きさ
+						140, 140,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
@@ -151,7 +154,7 @@ void map_draw()
 			{
 				if (player.cnt == 1)
 				{
-					primitive::line(map[i][j].pos.x + 20 , map[i][j].pos.y + 20, player.pos.x + 40, player.pos.y + 70, 1, 1, 1, 1,3);
+					primitive::line(map[i][j].pos.x + 75 , map[i][j].pos.y + 65, player.pos.x + 40, player.pos.y + 70, 1, 1, 1, 1,3);
 				}
 				else
 				{
@@ -167,14 +170,14 @@ void map_draw()
 
 	if (k >=2 )
 	{
-		primitive::line(lineDraw[k - 1].x + 20, lineDraw[k - 1].y + 20, lineDraw[k - 2].x + 20, lineDraw[k - 2].y + 20, 0, 1, 0,1,5);
+		primitive::line(lineDraw[k - 1].x + 60, lineDraw[k - 1].y + 70, lineDraw[k - 2].x + 20, lineDraw[k - 2].y + 20, 0, 1, 0,1,5);
 	}
 
 	//クリアした後
-	if (game_state == 2)
-	{
-		font::textOut(2, "CLEAR", 40, 250, 1.3f, 1.3f, 0, 1, 1);
-	}
+//if (game_state == 2)
+//{
+//	font::textOut(2, "CLEAR", 40, 250, 1.3f, 1.3f, 0, 1, 1);
+//}
 
 	//連結前の画面処理
 	if (player.score !=1)

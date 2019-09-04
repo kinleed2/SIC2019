@@ -38,7 +38,7 @@ void check_enemy_guard()
 	{
 
 		if (enemyGuard[l].exist == FALSE) continue;
-		if (player.state >= 2) continue;
+		if (player.exist == FALSE) continue;
 
 		if (enemyGuard[l].direction == right
 			&& player.rpos.x < enemyGuard[l].pos.x + 80 + 100
@@ -77,11 +77,7 @@ void check_enemy_guard()
 					{
 						map[i][j].connectFlag = FALSE;
 						player.cnt = 0;
-
-						if (k == 2)
-						{
-							player.score--;
-						}
+						player.score = 0;
 
 					}
 				}
@@ -100,10 +96,6 @@ void check_enemy_guard()
 		}
 	}
 		
-	
-	
-	
-
 	//debug::setString("check.hp:%d", player.hp);
 }
 
@@ -114,7 +106,7 @@ void check_enemy_uav()
 	{
 
 		if (enemyUav[l].exist == FALSE) continue;
-		if (player.state >= 2) continue;
+		if (player.exist == FALSE) continue;
 
 		if (player.rpos.x < enemyUav[l].pos.x + 100
 			&& player.rpos.x + 50 > enemyUav[l].pos.x - 60
@@ -136,11 +128,11 @@ void check_enemy_camera()
 	{
 
 		if (enemyCamera[l].exist == FALSE) continue;
-		if (player.state >= 2) continue;
+		if (player.exist == FALSE) continue;
 
 		if (player.rpos.x < enemyCamera[l].pos.x + 160
 			&& player.rpos.x + 50 > enemyCamera[l].pos.x
-			&&player.rpos.y  + 50 > enemyCamera[l].pos.y
+			&&player.rpos.y  + 50 > enemyCamera[l].pos.y + 60
 			&& player.rpos.y < enemyCamera[l].pos.y + 160)
 		{
 			player.hp--;
@@ -169,7 +161,6 @@ void check(int returnStage,int nextStage)
 		game_state = returnStage;
 	}
 
-
 	int i, j;
 	for ( i = 0; i < 24; i++)
 	{
@@ -181,8 +172,8 @@ void check(int returnStage,int nextStage)
 				&& player.pos.x >= map[i][j].pos.x - 10
 				&& player.pos.x <= map[i][j].pos.x)
 			{
-
 				player.anime = 0;
+				player.speed = VECTOR2(0, 0);
 
 				game_state = nextStage;
 			}
