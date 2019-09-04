@@ -43,6 +43,7 @@ void player_update()
 
 		if (player.anime == 3)
 		{
+			Sleep(500);
 			player.state = 2;
 		}
 
@@ -88,7 +89,7 @@ void player_draw()
 			player.texSize.x, player.texSize.y,     // 元画像大きさ
 			player.texPivot.x, player.texPivot.y,   // 基準点の位置
 			0.0f,
-			1, 1, 1, 1
+			1.0f, 1.0f, 1.0f, 1.0f
 			);
 
 	}
@@ -98,10 +99,10 @@ void player_draw()
 	{
 		//primitive::circle(player.hookPos.x, player.hookPos.y + 20, 20, 0, 1, 0);
 
-		sprite_render(player.data,                  // 使用するスプライト
+		sprite_render(sprItem,                  // 使用するスプライト
 			player.hookPos.x, player.hookPos.y,             // 位置
 			1, 1,         // スケールv
-			760,0,       // 元画像位置
+			0,120 + 60,       // 元画像位置
 			40, 40,     // 元画像大きさ
 			0, 0,   // 基準点の位置
 			0.0f,
@@ -115,10 +116,10 @@ void player_draw()
 	if (player.state == 1 && player.pos.y >= player.hookPos.y + 30)
 	{
 		
-		sprite_render(player.data,                  // 使用するスプライト
-			player.hookPos.x + 20 , player.hookPos.y + 15,             // 位置
+		sprite_render(sprItem,                  // 使用するスプライト
+			player.hookPos.x + 20 , player.hookPos.y + 20,             // 位置
 			1,1 ,         // スケールv
-			740,40,      // 元画像位置
+			0,120,      // 元画像位置
 			60,60,   // 元画像大きさ
 			30,30,   // 基準点の位置
 			0,
@@ -126,15 +127,15 @@ void player_draw()
 			);
 		if (player.direction == right)
 		{
-			primitive::line(player.pos.x + 80, player.pos.y + 20, player.hookPos.x + 20, player.hookPos.y + 20, 0, 0, 0, 1, 2);
+			primitive::line(player.pos.x + 80, player.pos.y + 20, player.hookPos.x + 20, player.hookPos.y + 22, 0, 0, 0, 1, 2);
 		}
 		else if (player.direction == left)
 		{
-			primitive::line(player.pos.x, player.pos.y + 20, player.hookPos.x + 20, player.hookPos.y + 20, 0, 0, 0, 1, 2);
+			primitive::line(player.pos.x, player.pos.y + 20, player.hookPos.x + 20, player.hookPos.y + 22, 0, 0, 0, 1, 2);
 		}
 		else
 		{
-			primitive::line(player.pos.x + 20, player.pos.y + 20, player.hookPos.x + 20, player.hookPos.y + 20, 0, 0, 0, 1, 2);
+			primitive::line(player.pos.x + 20, player.pos.y + 20, player.hookPos.x + 20, player.hookPos.y + 22, 0, 0, 0, 1, 2);
 		}
 	}
 
@@ -158,12 +159,12 @@ void player_draw()
 
 	if (player.exist == FALSE)
 	{
-		if (player.state == 0)
+		if (player.state == 0 || player.state == 1)
 		{
-			sprite_render(player.data,                  // 使用するスプライト
+			sprite_render(sprItem,                  // 使用するスプライト
 				player.pos.x - 80, player.pos.y,             // 位置
 				1, 1,         // スケールv
-				0 + player.anime * 240, 480,       // 元画像位置
+				0 + player.anime * 240, 0,       // 元画像位置
 				240, 120,     // 元画像大きさ
 				0, 0,   // 基準点の位置
 				0.0f,
@@ -171,18 +172,6 @@ void player_draw()
 				);
 		}
 
-		else if (player.state == 1)
-		{
-			sprite_render(player.data,                  // 使用するスプライト
-				player.hookPos.x - 80, player.hookPos.y - 120,             // 位置
-				1, 1,         // スケールv
-				0 + player.anime * 240, 480,       // 元画像位置
-				240, 120,     // 元画像大きさ
-				0, 0,   // 基準点の位置
-				0.0f,
-				1, 1, 1, 1
-				);
-		}
 	}
 
 
