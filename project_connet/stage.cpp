@@ -508,6 +508,7 @@ void stage_0_update()
 		if (player.pos.y == 560 && player.pos.x >= 620)
 		{
 			player.speed.x = 0;
+			player.anime = 0;
 			player.guideState++;
 		}
 	
@@ -678,6 +679,7 @@ int stage_end(int stage)
 	//マップチップ更新
 	map_update(stageEnd);
 
+	enemy_init();
 
 	player.direction = right;
 	

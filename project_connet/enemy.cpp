@@ -3,6 +3,7 @@
 OBJ2D enemyGuard[3];
 OBJ2D enemyUav[3];
 OBJ2D enemyCamera[3];
+extern OBJ2D player;
 extern int game_timer;
 
 void enemy_init()
@@ -83,6 +84,19 @@ void enemy_draw()
 				1, 1, 1, 1
 				);
 
+			if (enemyGuard[i].atk == 1)
+			{
+				sprite_render(player.data,                  // 使用するスプライト
+					enemyGuard[i].pos.x , enemyGuard[i].pos.y - 70,             // 位置
+					enemyGuard[i].scale.x, enemyGuard[i].scale.y,         // スケールv
+					1240,80,      // 元画像位置
+					40,80,     // 元画像大きさ
+					0,0,   // 基準点の位置
+					0,
+					1, 1, 1, 1
+					);
+			}
+
 		
 		}
 
@@ -109,6 +123,18 @@ void enemy_draw()
 				1, 1, 1, 1
 				);
 
+			if (enemyUav[i].atk == 1)
+			{
+				sprite_render(player.data,                  // 使用するスプライト
+					enemyUav[i].pos.x + 10, enemyUav[i].pos.y - 70,             // 位置
+					enemyUav[i].scale.x, enemyUav[i].scale.y,         // スケールv
+					1240, 80,      // 元画像位置
+					40, 80,     // 元画像大きさ
+					0, 0,   // 基準点の位置
+					0,
+					1, 1, 1, 1
+					);
+			}
 
 
 		}
@@ -142,7 +168,18 @@ void enemy_draw()
 				1, 1, 1, 1
 				);
 
-
+			if (enemyCamera[i].atk == 1)
+			{
+				sprite_render(player.data,                  // 使用するスプライト
+					enemyCamera[i].rpos.x - 20, enemyCamera[i].rpos.y - 100,             // 位置
+					enemyCamera[i].scale.x, enemyCamera[i].scale.y,         // スケールv
+					1240, 80,      // 元画像位置
+					40, 80,     // 元画像大きさ
+					0, 0,   // 基準点の位置
+					0,
+					1, 1, 1, 1
+					);
+			}
 
 		}
 
@@ -162,6 +199,7 @@ void enemy_guard_init(OBJ2D *obj, float x, float y, int direction)
 	obj->texPivot = VECTOR2(0, 0);
 	obj->texSize = VECTOR2(80, 120);
 	obj->scale = VECTOR2(1, 1);
+	obj->atk = 0;
 }
 
 
@@ -176,6 +214,7 @@ void enemy_uav_init(OBJ2D *obj, float x, float y, int direction)
 	obj->texPivot = VECTOR2(0, 0);
 	obj->texSize = VECTOR2(60, 60);
 	obj->scale = VECTOR2(1, 1);
+	obj->atk = 0;
 }
 
 void enemy_camera_init(OBJ2D *obj, float x, float y, int direction, float fixShowX, float fixShowY,int rotate)
@@ -192,6 +231,7 @@ void enemy_camera_init(OBJ2D *obj, float x, float y, int direction, float fixSho
 	obj->rpos.x = x + fixShowX;
 	obj->rpos.y = y + fixShowY;
 	obj->rotate = ToRadian(rotate);
+	obj->atk = 0;
 }
 
 
