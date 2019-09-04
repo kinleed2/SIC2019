@@ -37,7 +37,8 @@ enum STAGE
 	stage2set, stage2play, stage2end, 
 	stage3set, stage3play, stage3end, 
 	stage4set, stage4play, stage4end, 
-	stage5set, stage5play, stage5end
+	stage5set, stage5play, stage5end,
+	stage6set, stage6play, stage6end,
 };
 
 #endif// ! INCLUDED_COMMON
