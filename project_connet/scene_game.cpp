@@ -18,6 +18,9 @@ Sprite* sprBg;
 Sprite* sprEnemy;
 Sprite* sprEnemy2;
 Sprite* sprMap;
+Sprite* sprMap2;
+Sprite* sprItem;
+Sprite* sprItem2;
 
 // 別のファイルの変数を使用する宣言
 extern int nextScene;
@@ -34,7 +37,7 @@ void game_init()
     game_state = 0;
     game_timer = 0;
 
-	player.hp = 3;
+	player.hp = 5;
 	player.guideState = 0;
 	music::play(0, TRUE);
 }
@@ -86,6 +89,7 @@ void game_update()
 		sprite_load(&sprMap2, L"./Data/Images/map2.png");
 		sprite_load(&sprItem, L"./Data/Images/item.png");
 		sprite_load(&sprItem2, L"./Data/Images/item2.png");
+
 		stage_0_init();
 
 		GameLib::setBlendMode(Blender::BS_ALPHA);
@@ -106,6 +110,13 @@ void game_update()
 
 	case stage0end:
 
+
+		if (TRG(0) & PAD_TRG4)
+		{
+			game_state ++;
+		}
+
+
 		game_state = stage_end(game_state);
 		break;
 
@@ -122,8 +133,6 @@ void game_update()
 		//player_init();
 		
 		stage_1_init();
-
-        GameLib::setBlendMode(Blender::BS_ALPHA);
 
         game_state++;
         break;
@@ -151,7 +160,6 @@ void game_update()
 
 		stage_2_init();
 
-		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		game_state++;
 	
@@ -176,7 +184,6 @@ void game_update()
 
 		stage_3_init();
 
-		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		game_state++;
 
@@ -202,7 +209,6 @@ void game_update()
 
 		stage_4_init();
 
-		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		game_state++;
 
@@ -228,7 +234,6 @@ void game_update()
 
 		stage_5_init();
 
-		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		game_state++;
 
@@ -294,15 +299,18 @@ void game_draw()
 	GameLib::clear(0, 0, 0);
 
     // 画面を白で塗りつぶす
- 
+	
+	
+
 	map_draw();
 
 	enemy_draw();
 	
 	
 	if (game_state == stage0play) stage_0_draw();
-
+	
 	player_draw();
+	
 
 	if (game_state  % 3 == 2) stage_end_draw(game_state);
 }
@@ -327,4 +335,6 @@ void game_end()
 	SAFE_DELETE(sprMap2);
 	SAFE_DELETE(sprItem);
 	SAFE_DELETE(sprItem2);
+
+
 }		

@@ -46,6 +46,7 @@ void check_enemy_guard()
 			&&player.rpos.y + 50 >= enemyGuard[l].pos.y
 			&& player.rpos.y < enemyGuard[l].pos.y + 120)
 		{
+			enemyGuard[l].atk = 1;
 			player.hp--;
 			player.exist = FALSE;
 		}
@@ -56,6 +57,7 @@ void check_enemy_guard()
 			&& player.rpos.y + 50 >= enemyGuard[l].pos.y
 			&& player.rpos.y < enemyGuard[l].pos.y + 120)
 		{
+			enemyGuard[l].atk = 1;
 			player.hp--;
 			player.exist = FALSE;
 		}
@@ -113,6 +115,7 @@ void check_enemy_uav()
 			&& player.rpos.y + 50 > enemyUav[l].pos.y + 40
 			&& player.rpos.y < enemyUav[l].pos.y + 200)
 		{
+			enemyUav[l].atk = 1;
 			player.hp--;
 			player.exist = FALSE;
 			
@@ -135,6 +138,7 @@ void check_enemy_camera()
 			&&player.rpos.y  + 50 > enemyCamera[l].pos.y + 60
 			&& player.rpos.y < enemyCamera[l].pos.y + 160)
 		{
+			enemyCamera[l].atk = 1;
 			player.hp--;
 			player.exist = FALSE;
 		}

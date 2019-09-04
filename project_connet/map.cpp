@@ -96,7 +96,7 @@ void map_draw()
 						map[i][j].pos.x - 40, map[i][j].pos.y - 30,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
 						0,40,    // 元画像位置
-						118,110,    // 元画像大きさ
+						110,110,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
@@ -107,8 +107,8 @@ void map_draw()
 					sprite_render(map[i][j].data,                  // 使用するスプライト
 						map[i][j].pos.x - 40, map[i][j].pos.y -30,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
-						118, 40,    // 元画像位置
-						118, 110,    // 元画像大きさ
+						110, 40,    // 元画像位置
+						110, 110,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
@@ -120,10 +120,10 @@ void map_draw()
 			case 3:
 				if (player.score == 1)
 				{
-					sprite_render(map[i][j].data,                  // 使用するスプライト
+					sprite_render(sprMap2,                  // 使用するスプライト
 						map[i][j].pos.x - 60, map[i][j].pos.y -20 ,          // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
-						140, 150,    // 元画像位置
+						140, 0,    // 元画像位置
 						140, 140,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
@@ -132,10 +132,10 @@ void map_draw()
 				}
 				else
 				{
-					sprite_render(map[i][j].data,                  // 使用するスプライト
+					sprite_render(sprMap2,                  // 使用するスプライト
 						map[i][j].pos.x - 60, map[i][j].pos.y -20,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
-						0, 150,    // 元画像位置
+						0, 0,    // 元画像位置
 						140, 140,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
@@ -144,17 +144,60 @@ void map_draw()
 				}
 				break;
 			case 4: 
-				primitive::circle(j* MAPCHIP_SIZE + 20, i * MAPCHIP_SIZE + 20, 20, 1, 1, 1, 0.2);
+				switch (map[i][j].state)
+				{
+				case 1:
+
+					sprite_render(sprMap2,                  // 使用するスプライト
+						map[i][j].pos.x, map[i][j].pos.y -20,             // 位置
+						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
+						0, 140,    // 元画像位置
+						100, 40,    // 元画像大きさ
+						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
+						0.0f,
+						1, 1, 1, 1
+						);
+
+					
+					break;
+				case 2:
+
+					sprite_render(sprMap2,                  // 使用するスプライト
+						map[i][j].pos.x, map[i][j].pos.y - 20,             // 位置
+						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
+						100, 140,    // 元画像位置
+						100, 40,    // 元画像大きさ
+						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
+						0.0f,
+						1, 1, 1, 1
+						);
+					break;
+				case 3:
+
+					sprite_render(sprMap2,                  // 使用するスプライト
+						map[i][j].pos.x, map[i][j].pos.y - 20,             // 位置
+						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
+						200, 140,    // 元画像位置
+						100, 40,    // 元画像大きさ
+						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
+						0.0f,
+						1, 1, 1, 1
+						);
+
+					break;
+				default:
+					break;
+				}
 				break;
 			default:
 				break;
 			}
 
-			if (map[i][j].connectFlag == TRUE)
+			if (map[i][j].connectFlag == TRUE && game_state % 3 != 2)
 			{
 				if (player.cnt == 1)
 				{
-					primitive::line(map[i][j].pos.x + 75 , map[i][j].pos.y + 65, player.pos.x + 40, player.pos.y + 70, 1, 1, 1, 1,3);
+					primitive::line(map[i][j].pos.x - 23 , map[i][j].pos.y + 52, player.pos.x + 35, player.pos.y + 70, 1, 0, 0, 1,3);
 				}
 				else
 				{
@@ -170,7 +213,7 @@ void map_draw()
 
 	if (k >=2 )
 	{
-		primitive::line(lineDraw[k - 1].x + 60, lineDraw[k - 1].y + 70, lineDraw[k - 2].x + 20, lineDraw[k - 2].y + 20, 0, 1, 0,1,5);
+		primitive::line(lineDraw[k - 1].x - 23, lineDraw[k - 1].y + 52, lineDraw[k - 2].x - 23, lineDraw[k - 2].y + 52, 0, 1, 0,1,3);
 	}
 
 	//クリアした後
@@ -180,10 +223,10 @@ void map_draw()
 //}
 
 	//連結前の画面処理
-	if (player.score !=1)
-	{
-		primitive::rect(0, 0, 1280, 960, 0, 0, 0, 0, 0, 0, 0.2);
-	}
+	//if (player.score !=1)
+	//{
+	//	primitive::rect(0, 0, 1280, 960, 0, 0, 0, 0, 0, 0, 0.2);
+	//}
 	
 	//primitive::rect(0, 0, 1280, 960, 0, 0, 0, 1, 1, 1, 0.3);
 
