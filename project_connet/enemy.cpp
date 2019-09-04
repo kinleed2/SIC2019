@@ -35,7 +35,6 @@ void enemy_update()
 	//enemy_guard_move(300,700,1);
 }
 
-
 void enemy_draw()
 {
 
@@ -53,10 +52,20 @@ void enemy_draw()
 				enemyAtk[2] = { enemyGuard[i].pos.x + 80 + 120, enemyGuard[i].pos.y };
 				enemyAtk[3] = { enemyGuard[i].pos.x + 80 + 120, enemyGuard[i].pos.y + 120 };
 
-				
-
 				//primitive::rect(enemyGuard[i].pos.x + 95, enemyGuard[i].pos.y, 100, 120, 0, 0, 0, 1, 1, 0, 0.7);
 				primitive::quad(enemyAtk, 1, 1, 0, 0.7);
+				if (enemyGuard[i].atk == 1)
+				{
+					sprite_render(sprItem,                  // 使用するスプライト
+						enemyGuard[i].pos.x + 40, enemyGuard[i].pos.y - 70,             // 位置
+						enemyGuard[i].scale.x, enemyGuard[i].scale.y,         // スケールv
+						140, 0,      // 元画像位置
+						40, 80,     // 元画像大きさ
+						0, 0,   // 基準点の位置
+						0,
+						1, 1, 1, 1
+						);
+				}
 			}
 			else
 			{
@@ -65,11 +74,21 @@ void enemy_draw()
 				enemyAtk[2] = { enemyGuard[i].pos.x - 120, enemyGuard[i].pos.y };
 				enemyAtk[3] = { enemyGuard[i].pos.x - 120, enemyGuard[i].pos.y + 120 };
 
-				
 				//primitive::rect(enemyGuard[i].pos.x - 95, enemyGuard[i].pos.y, 100, 120, 0, 0, 0, 1, 1, 0, 0.7);
 				primitive::quad(enemyAtk, 1, 1, 0, 0.7);
+				if (enemyGuard[i].atk == 1)
+				{
+					sprite_render(sprItem,                  // 使用するスプライト
+						enemyGuard[i].pos.x, enemyGuard[i].pos.y - 70,             // 位置
+						enemyGuard[i].scale.x, enemyGuard[i].scale.y,         // スケールv
+						140, 0,      // 元画像位置
+						40, 80,     // 元画像大きさ
+						0, 0,   // 基準点の位置
+						0,
+						1, 1, 1, 1
+						);
+				}
 			}
-
 
 			//primitive::rect(enemyGuard[i].pos.x, enemyGuard[i].pos.y, 80, 120, 0, 0, 0, 1, 1,1);
 			
@@ -84,20 +103,8 @@ void enemy_draw()
 				1, 1, 1, 1
 				);
 
-			if (enemyGuard[i].atk == 1)
-			{
-				sprite_render(sprItem,                  // 使用するスプライト
-					enemyGuard[i].pos.x , enemyGuard[i].pos.y - 70,             // 位置
-					enemyGuard[i].scale.x, enemyGuard[i].scale.y,         // スケールv
-					140,0,      // 元画像位置
-					40,80,     // 元画像大きさ
-					0,0,   // 基準点の位置
-					0,
-					1, 1, 1, 1
-					);
-			}
+	
 
-		
 		}
 
 		if (enemyUav[i].exist == TRUE)
@@ -106,8 +113,8 @@ void enemy_draw()
 
 			enemyAtk[0] = { enemyUav[i].pos.x + 30, enemyUav[i].pos.y + 50 };
 			enemyAtk[1] = { enemyUav[i].pos.x + 30, enemyUav[i].pos.y + 50 };
-			enemyAtk[2] = { enemyUav[i].pos.x + 110, enemyUav[i].pos.y + 200 };
-			enemyAtk[3] = { enemyUav[i].pos.x - 50, enemyUav[i].pos.y + 200 };
+			enemyAtk[2] = { enemyUav[i].pos.x + 160, enemyUav[i].pos.y + 200 };
+			enemyAtk[3] = { enemyUav[i].pos.x - 100, enemyUav[i].pos.y + 200 };
 
 			primitive::quad(enemyAtk, 1, 1, 0, 0.7);
 			//primitive::rect(enemyUav[i].pos.x - 60, enemyUav[i].pos.y + 40, 160, 160, 0, 0, 0, 1, 1, 0, 0.7);
@@ -145,8 +152,6 @@ void enemy_draw()
 			enemyAtk[1] = { enemyCamera[i].rpos.x, enemyCamera[i].rpos.y };
 			enemyAtk[2] = { enemyCamera[i].pos.x + 190, enemyCamera[i].pos.y + 160 };
 			enemyAtk[3]	= { enemyCamera[i].pos.x - 30, enemyCamera[i].pos.y + 160 };
-
-
 
 			if (enemyCamera[i].direction == right)
 			{
@@ -263,8 +268,6 @@ void enemy_guard_move(OBJ2D *obj,int leftLimit, int rightLimit,int speed)
 
 	obj->anime = 2 + game_timer / 20 % 4;
 
-
-
 }
 
 
@@ -346,6 +349,7 @@ void enemy_camera_move(OBJ2D *obj, int mode, int leftLimit, int rightLimit, int 
 	switch (mode)
 	{
 	case 1:
+
 		switch (obj->direction)
 		{
 		case left:
@@ -369,6 +373,7 @@ void enemy_camera_move(OBJ2D *obj, int mode, int leftLimit, int rightLimit, int 
 		}
 		break;
 	case 2:
+
 		switch (obj->direction)
 		{
 		case up:

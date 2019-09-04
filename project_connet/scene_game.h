@@ -12,6 +12,7 @@
 //------< 定数 >----------------------------------------------------------------
 extern Sprite* sprPlayer;
 extern Sprite* sprBg;
+extern Sprite* sprBg2;
 extern Sprite* sprEnemy;
 extern Sprite* sprEfc;
 extern Sprite* sprNumber;
@@ -20,6 +21,7 @@ extern Sprite* sprMap;
 extern Sprite* sprMap2;
 extern Sprite* sprItem;
 extern Sprite* sprItem2;
+extern Sprite* sprUi;
 //------< プロトタイプ宣言 >-----------------------------------------------------
 void game_init();
 void game_update();

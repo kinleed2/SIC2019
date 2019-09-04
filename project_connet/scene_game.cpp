@@ -12,20 +12,24 @@
 //------< 変数 >----------------------------------------------------------------
 int game_state;     // 状態
 int game_timer;     // タイマー
+int ending_timer;
 
 Sprite* sprPlayer;
 Sprite* sprBg;
+Sprite* sprBg2;
 Sprite* sprEnemy;
 Sprite* sprEnemy2;
 Sprite* sprMap;
 Sprite* sprMap2;
 Sprite* sprItem;
 Sprite* sprItem2;
+Sprite* sprUi;
 
 // 別のファイルの変数を使用する宣言
 extern int nextScene;
 extern OBJ2D player;
-
+extern OBJ2D enemyGuard[3];
+extern OBJ2D map[24][32];
 
 
 
@@ -39,7 +43,9 @@ void game_init()
 
 	player.hp = 5;
 	player.guideState = 0;
-	music::play(0, TRUE);
+	//music::play(0, TRUE);
+
+	ending_timer = 0;
 }
 
 //--------------------------------
@@ -66,10 +72,12 @@ void game_common()
 //--------------------------------
 void game_update()
 {
-	//if (TRG(0) & PAD_START || player.hp == 0)
-	//{
-	//	nextScene = SCENE_TITLE;
-	//}
+	if (player.hp == 0)
+	{
+		game_state = 99;
+
+	}
+
 	if (TRG(0) & PAD_START)
 	{
 		nextScene = SCENE_TITLE;
@@ -79,17 +87,78 @@ void game_update()
 
     switch (game_state)
     {
+	case 99:
+
+		
+
+		
+		if (TRG(0) & PAD_START)
+		{
+			nextScene = SCENE_TITLE;
+		}
+
+
+		break;
+
+
+	case 100:
+
+		int j;
+
+		ending_timer++;
+
+		sprite_load(&sprBg2, L"./Data/Images/ending.png");
+		
+		if (TRG(0) & PAD_START)
+		{
+			nextScene = SCENE_TITLE;
+		}
+
+		break;
+
+
+
+
+	case 101:
+
+
+		sprite_load(&sprUi, L"./Data/Images/ui.png");
+
+		sprite_load(&sprBg, L"./Data/Images/bg2.png");
+		ending_timer++;
+
+		stage_3_update();
+
+		//if (ending_timer >= 500)
+		//{
+		//	//music::stop(0);
+		//	if (ending_timer == 510)
+		//	{
+		//		//music::play(1);
+		//	}
+		//}
+
+		if (TRG(0) & PAD_START && ending_timer >= 800)
+		{
+			nextScene = SCENE_TITLE;
+		}
+
+
+		break;
+
+
 	case stage0set:
 
 		sprite_load(&sprPlayer, L"./Data/Images/player.png");       // プレイヤースプライト
 		sprite_load(&sprBg, L"./Data/Images/bg.png");
+		sprite_load(&sprBg2, L"./Data/Images/game_over.png");
 		sprite_load(&sprEnemy, L"./Data/Images/enemy.png");
 		sprite_load(&sprEnemy2, L"./Data/Images/enemy_2.png");
 		sprite_load(&sprMap, L"./Data/Images/map.png");
 		sprite_load(&sprMap2, L"./Data/Images/map2.png");
 		sprite_load(&sprItem, L"./Data/Images/item.png");
 		sprite_load(&sprItem2, L"./Data/Images/item2.png");
-
+		
 		stage_0_init();
 
 		GameLib::setBlendMode(Blender::BS_ALPHA);
@@ -102,7 +171,7 @@ void game_update()
 	
 		stage_0_update();
 
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
 			game_state = stage0end;
 		}
@@ -111,7 +180,7 @@ void game_update()
 	case stage0end:
 
 
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
 			game_state ++;
 		}
@@ -119,9 +188,6 @@ void game_update()
 
 		game_state = stage_end(game_state);
 		break;
-
-
-
 
     case stage1set:
         //////// 初期設定 ////////
@@ -144,7 +210,7 @@ void game_update()
 		stage_1_update();
 		
 		//"D"を押すと次のステージへ
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
 			game_state = stage2set;
 		}
@@ -169,7 +235,7 @@ void game_update()
 		stage_2_update();
 
 		//"D"を押すと次のステージへ
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
 			game_state = stage3set;
 		}
@@ -183,7 +249,7 @@ void game_update()
 	case stage3set:
 
 		stage_3_init();
-
+		sprite_load(&sprBg, L"./Data/Images/bg2.png");
 
 		game_state++;
 
@@ -194,7 +260,7 @@ void game_update()
 		stage_3_update();
 
 		//"D"を押すと次のステージへ
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
 			game_state = stage4set;
 		}
@@ -208,7 +274,7 @@ void game_update()
 	case stage4set:
 
 		stage_4_init();
-
+		sprite_load(&sprBg, L"./Data/Images/bg.png");
 
 		game_state++;
 
@@ -219,7 +285,7 @@ void game_update()
 		stage_4_update();
 
 		//"D"を押すと次のステージへ
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
 			game_state = stage5set;
 		}
@@ -244,7 +310,7 @@ void game_update()
 		stage_5_update();
 
 		//"D"を押すと次のステージへ
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
 			game_state = stage6set;
 		}
@@ -252,8 +318,7 @@ void game_update()
 
 	case stage5end:
 
-		Sleep(1000);
-		game_state++;
+		game_state = stage_end(game_state);
 		break;
 
 	case stage6set:
@@ -271,24 +336,29 @@ void game_update()
 		stage_6_update();
 
 		//"D"を押すと次のステージへ
-		if (TRG(0) & PAD_TRG4)
+		if (TRG(0) & PAD_SELECT)
 		{
-			game_state = stage5set;
+			game_state = stage6end;
 		}
 		break;
 
 	case stage6end:
-
-		Sleep(1000);
-		game_state++;
+		if (player.atk == 0)
+		{
+			game_state = 100;
+		}
+		else
+		{
+			game_state = 101;
+		}
 		break;
 
     }
     game_timer++;
 
 
-	debug::setString("game_timer:%d", game_timer);
-	debug::setString("game_state:%d", game_state);
+	//debug::setString("game_timer:%d", game_timer);
+	//debug::setString("game_state:%d", game_state);
 }
 
 //--------------------------------
@@ -300,19 +370,22 @@ void game_draw()
 
     // 画面を白で塗りつぶす
 	
-	
-
 	map_draw();
 
 	enemy_draw();
-	
 	
 	if (game_state == stage0play) stage_0_draw();
 	
 	player_draw();
 	
+	if (game_state  % 3 == 2) stage_end_draw();
 
-	if (game_state  % 3 == 2) stage_end_draw(game_state);
+	if (game_state == 99) game_over_draw();
+
+	if (game_state == 100) game_good_end_draw(ending_timer);
+
+	if (game_state == 101) game_bad_end_draw(ending_timer);
+
 }
 
 //--------------------------------
@@ -329,12 +402,13 @@ void game_end()
     // スプライトの破棄 
     SAFE_DELETE(sprPlayer); // プレイヤースプライトの破棄
 	SAFE_DELETE(sprBg);
+	SAFE_DELETE(sprBg2);
 	SAFE_DELETE(sprEnemy2);
 	SAFE_DELETE(sprEnemy);
 	SAFE_DELETE(sprMap);
 	SAFE_DELETE(sprMap2);
 	SAFE_DELETE(sprItem);
 	SAFE_DELETE(sprItem2);
-
+	SAFE_DELETE(sprUi);
 
 }		

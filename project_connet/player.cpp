@@ -141,28 +141,40 @@ void player_draw()
 
 
 	//HPの表示
-	int hpPos = 50;
+	int hpPos = 10;
 	int i;
 	for (i = 0; i < player.hp; i++)
 	{
 		sprite_render(sprItem,                  // 使用するスプライト
-			hpPos, 0,             // 位置
+			hpPos, 20,             // 位置
 			1, 1,         // スケールv
 			60, 0,       // 元画像位置
 			80, 80,     // 元画像大きさ
 			0, 0,   // 基準点の位置
 			0.0f,
 			1, 1, 1, 1);
-		hpPos += 100;
+		hpPos += 90;
 
 	}
 
 	if (player.exist == FALSE)
 	{
-		if (player.state == 0 || player.state == 1)
+		if (player.state == 0 )
 		{
 			sprite_render(sprItem2,                  // 使用するスプライト
 				player.pos.x - 80, player.pos.y,             // 位置
+				1, 1,         // スケールv
+				0 + player.anime * 240, 0,       // 元画像位置
+				240, 120,     // 元画像大きさ
+				0, 0,   // 基準点の位置
+				0.0f,
+				1, 1, 1, 1
+				);
+		}
+		else
+		{
+			sprite_render(sprItem2,                  // 使用するスプライト
+				player.hookPos.x - 80, player.hookPos.y,             // 位置
 				1, 1,         // スケールv
 				0 + player.anime * 240, 0,       // 元画像位置
 				240, 120,     // 元画像大きさ
@@ -175,16 +187,15 @@ void player_draw()
 	}
 
 
-
-
-debug::setString("player.hp:%d", player.hp);
-debug::setString("player.score:%d", player.score);
-debug::setString("player.cnt:%d", player.cnt);
-debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
-debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
-debug::setString("player.anime:%d", player.anime);
-debug::setString("player.hook:%d", hook);
-	debug::setString("player.timer;%d", player.timer);
+//debug::setString("player.hp:%d", player.hp);
+//debug::setString("player.score:%d", player.score);
+//debug::setString("player.cnt:%d", player.cnt);
+//debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
+//debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
+//debug::setString("player.anime:%d", player.anime);
+//debug::setString("player.hook:%d", hook);
+//debug::setString("player.timer;%d", player.timer);
+//debug::setString("player.atk;%d", player.atk);
 
 }
 
@@ -209,7 +220,6 @@ void player_move()
 		else if (player.speed.x > 0 && player.timer % 2 == 0)
 		{
 			player.speed.x--;
-
 
 		}
 		//左に移動する
@@ -244,11 +254,8 @@ void player_move()
 		
 	}
 
-
-
-	if (player.pos.x < 0)                    player.pos.x = 0;
+	if (player.pos.x < 0)							player.pos.x = 0;
 	if (player.pos.x > SCREEN_WIDTH - PL_WIDTH)     player.pos.x = SCREEN_WIDTH - PL_WIDTH;
-
 
 	if (player.state == 0)
 	{
@@ -268,14 +275,10 @@ void player_move()
 		}
 		else
 		{
-			player.anime = player.timer / 25 % 2;
+			player.anime = player.timer / 50 % 2;
 		}
 	}
 	
-
-
-
-
 }
 
 
@@ -317,12 +320,9 @@ void player_hook()
 						player.hookFlag = TRUE;
 						
 					}
-
-
 					player.hookPos.y = map[i][j].pos.y;
 
 					break;
-
 				}
 			}
 		}
@@ -330,16 +330,16 @@ void player_hook()
 
 	if (player.hookFlag)
 	{
-		if (TRG(0)& PAD_TRG1)
+		if (TRG(0)& PAD_TRG1 || TRG(0)& PAD_TRG2 || TRG(0)& PAD_TRG4)
 		{
 			player.state = 1;
 			switch (player.direction)
 			{
 			case right:
-				player.speed.x = +2;
+				player.speed.x = + 3;
 				break;
 			case left:
-				player.speed.x = -2;
+				player.speed.x = - 3;
 				break;
 			case up:
 				break;
@@ -405,7 +405,7 @@ void player_connect()
 				&& player.pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
 				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
 			{
-				if (TRG(0)&PAD_TRG1)
+				if (TRG(0)& PAD_TRG1 || TRG(0)& PAD_TRG2 || TRG(0)& PAD_TRG4)
 				{
 					map[i][j].connectFlag = TRUE;
 					player.cnt++;
@@ -418,10 +418,27 @@ void player_connect()
 							sound::play(2);
 						}
 					}
-					
 
 				}
 			}
+
+
+			if (map[i][j].type == 4
+				&& map[i][j].state == 1
+				&& player.pos.y + MAPCHIP_SIZE == map[i][j].pos.y
+				&& player.pos.x + 2 * MAPCHIP_SIZE >= map[i][j].pos.x
+				&& player.pos.x <= map[i][j].pos.x + MAPCHIP_SIZE)
+			{
+				if (TRG(0)& PAD_TRG1 || TRG(0)& PAD_TRG2 || TRG(0)& PAD_TRG4)
+				{
+					map[i][j].state = 2;
+				}
+
+			}
+
+
+
+
 		}
 	}
 }
@@ -453,4 +470,5 @@ void player_fall()
 		}
 		
 	}
+
 }

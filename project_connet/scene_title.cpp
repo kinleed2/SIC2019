@@ -42,16 +42,23 @@ void title_update()
 
     case 0:
         //////// 初期設定 ////////
+		sprite_load(&sprBg, L"./Data/Images/logo.png");
 
-		if (TRG(0) & PAD_START || title_timer == 1000)
+
+
+		if (TRG(0) & PAD_START || title_timer == 500)
 		{
 			title_state++;
 		}
 		
         break;
 	case 1:
-		music::play(0);
+		music::play(0,TRUE);
+		sprite_load(&sprBg, L"./Data/Images/title_bg3.png");
+
 		title_state++;
+
+
 		break;
     case 2:
         //////// 通常時 ////////
@@ -61,6 +68,7 @@ void title_update()
             title_state++;
         }
         break;
+		
 		
 
     // フェードアウト用のcase 2:をつくる
@@ -77,7 +85,7 @@ void title_update()
 
     // デバッグ用文字列の設定
     //debug::setString("title_state:%d", title_state);
-    debug::setString("title_timer:%d", title_timer);
+   // debug::setString("title_timer:%d", title_timer);
 }
 
 //--------------------------------
@@ -91,29 +99,45 @@ void title_draw()
 
 
 
-	if (title_timer <= 1000 || title_state == 0)
+	if (title_state == 0)
 	{
 
-		
+		sprite_render(sprBg,                  // 使用するスプライト
+			0, 0,             // 位置
+			1, 1,         // スケールv
+			0, 0,      // 元画像位置
+			1280, 960,   // 元画像大きさ
+			0, 0,   // 基準点の位置
+			0.0f,
+			1, 1, 1, showPresent
+			);
 
-	font::textOut(2, "present", 40, 250, 1.3f, 1.3f, 0, 1, 1, showPresent);
+	//font::textOut(4, "present", 500, 600, 2.0f, 2.0f, 1, 1, 1, showPresent);
 	showPresent += 0.003f;
 	
-
-
-
 	}
+
 	if (title_state >= 2)
 	{
 	
 		GameLib::clear(0, 0, 0);
 		// 文字表示機能
 		//font::textOut(2, "ECC COMP", 50, 100, 2, 2, 1, 1, 0);
-		font::textOut(2, "Project Connect", 40, 250, 1.3f, 1.3f, 0, 1, 1);
+		//font::textOut(2, "Project Connect", 40, 250, 1.3f, 1.3f, 0, 1, 1);
+
+		sprite_render(sprBg,                  // 使用するスプライト
+			0, -100,             // 位置
+			1, 1,         // スケールv
+			0, 0,      // 元画像位置
+			1280, 960,   // 元画像大きさ
+			0, 0,   // 基準点の位置
+			0.0f,
+			1, 1, 1, 1
+			);
 
 		// 文字を点滅させる
 		if (title_timer / 32 % 2)
-			font::textOut(3, "Push Start", 100, 500, 3, 3);
+			font::textOut(4, "Push Start", 450, 700, 2, 2,1,1,1);
 
 		// タイトル画面のフェードアウト
 		if (fadeOut > 0.0f)
@@ -130,6 +154,5 @@ void title_draw()
 //--------------------------------
 void title_end()
 {
-
 	music::stop(0);
 }

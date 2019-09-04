@@ -30,22 +30,22 @@ void map_init()
 			map[i][j].texPivot	=VECTOR2(0,0);
 		}
 	}
-
 }
-
-
 
 
 void map_update(int stage[24][32])
 {
-	
-
 	int i, j;
 	for (i = 0; i < 24; i++)
 	{
 		for (j = 0; j < 32; j++)
 		{
 			map[i][j].type = stage[i][j];
+			
+			if (map[i][j].type == 4 && map[i][j].state == 0)
+			{
+				map[i][j].state = player.score;
+			}
 
 		}
 	}
@@ -69,6 +69,8 @@ void map_draw()
 			);
 	}
 	
+
+
 
 	
 	int i, j, k = 0;
@@ -146,13 +148,13 @@ void map_draw()
 			case 4: 
 				switch (map[i][j].state)
 				{
-				case 1:
+				case 0:
 
 					sprite_render(sprMap2,                  // 使用するスプライト
 						map[i][j].pos.x, map[i][j].pos.y -20,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
 						0, 140,    // 元画像位置
-						100, 40,    // 元画像大きさ
+						80, 100,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
@@ -160,25 +162,25 @@ void map_draw()
 
 					
 					break;
-				case 2:
+				case 1:
 
 					sprite_render(sprMap2,                  // 使用するスプライト
 						map[i][j].pos.x, map[i][j].pos.y - 20,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
-						100, 140,    // 元画像位置
-						100, 40,    // 元画像大きさ
+						80, 140,    // 元画像位置
+						80, 100,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
 						);
 					break;
-				case 3:
+				case 2:
 
 					sprite_render(sprMap2,                  // 使用するスプライト
 						map[i][j].pos.x, map[i][j].pos.y - 20,             // 位置
 						map[i][j].scale.x, map[i][j].scale.y,         // スケールv
-						200, 140,    // 元画像位置
-						100, 40,    // 元画像大きさ
+						160, 140,    // 元画像位置
+						80, 100,    // 元画像大きさ
 						map[i][j].texPivot.x, map[i][j].texPivot.y,   // 基準点の位置
 						0.0f,
 						1, 1, 1, 1
