@@ -571,8 +571,10 @@ void stage_0_update()
 		if (player.pos.y == 560 && player.pos.x >= 620)
 		{
 			player.speed.x = 0;
+			player.speed.y = 0;
 			player.anime = 0;
 			player.guideState++;
+			player.state = 0;
 		}
 	
 		break;

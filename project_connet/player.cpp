@@ -187,13 +187,13 @@ void player_draw()
 	}
 
 
-//debug::setString("player.hp:%d", player.hp);
+//debug::setString("player.state:%d", player.state);
 //debug::setString("player.score:%d", player.score);
-//debug::setString("player.cnt:%d", player.cnt);
-debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
+//debug::setString("player.groundflag:%d", player.groundFlag);
+//debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 //debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
 //debug::setString("player.anime:%d", player.anime);
-//debug::setString("player.hook:%d", hook);
+//debug::setString("player.type:%d", player.type);
 //debug::setString("player.timer;%d", player.timer);
 //debug::setString("player.atk;%d", player.atk);
 
