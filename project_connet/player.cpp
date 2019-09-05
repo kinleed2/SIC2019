@@ -11,7 +11,7 @@ void player_init()
 	player.texSize = VECTOR2(80, 120);
 	player.texPos = VECTOR2(0, 0);
 	player.scale = VECTOR2(1, 1);
-
+	player.hp = 5;
 	player.pos.x = 0;
 	player.pos.y = 800;
 	player.timer = 0;
@@ -190,7 +190,7 @@ void player_draw()
 //debug::setString("player.hp:%d", player.hp);
 //debug::setString("player.score:%d", player.score);
 //debug::setString("player.cnt:%d", player.cnt);
-//debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
+debug::setString("player.x:%f player.y:%f", player.pos.x, player.pos.y);
 //debug::setString("player.speed.x:%f player.speed.y:%f", player.speed.x, player.speed.y);
 //debug::setString("player.anime:%d", player.anime);
 //debug::setString("player.hook:%d", hook);
