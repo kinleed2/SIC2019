@@ -46,27 +46,27 @@ void game_good_end_draw(int ending_timer)
 	switch (x)
 	{
 	case 0:
-		if (ending_timer >= 150)
+		if (ending_timer >= 100)
 		{
 			x++;
 		}
 
 		break;
 	case 1:
-		if (ending_timer >= 300)
+		if (ending_timer >= 200)
 		{
 			x++;
 		}
 
 		break;
 	case 2:
-		if (ending_timer >= 450)
+		if (ending_timer >= 300)
 		{
 			x++;
 		}
 		break;
 	case 3:
-			if (ending_timer >= 650)
+			if (ending_timer >= 400)
 			{
 				x++;
 			}
@@ -79,7 +79,7 @@ void game_good_end_draw(int ending_timer)
 		font::textOut(4, "KIN LEE", 400, 450, 1.0f, 1.0f, 1, 1, 1);
 		font::textOut(4, "SHINYA MORIKUCHI", 400, 500, 1.0f, 1.0f, 1, 1, 1);
 		font::textOut(4, "XIANGTAI MONG", 400, 550, 1.0f, 1.0f, 1, 1, 1);
-		if (ending_timer >= 1550)
+		if (ending_timer >= 650)
 		{
 			x++;
 		}
