@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="check.cpp" />
+    <ClCompile Include="ending.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="GameLib\debug.cpp" />
     <ClCompile Include="GameLib\dxtk_audio.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="audio.h" />
     <ClInclude Include="check.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="ending.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="GameLib\blender.h" />
     <ClInclude Include="GameLib\debug.h" />
