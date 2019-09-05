@@ -53,10 +53,10 @@ void game_init()
 //--------------------------------
 void game_common()
 {
-    if (TRG(0) & PAD_START)
-    {
-        nextScene = SCENE_TITLE;
-    }
+   // if (TRG(0) & PAD_START)
+   // {
+   //     nextScene = SCENE_TITLE;
+   // }
 
 	//map_update(stage1);
 	//
@@ -78,10 +78,10 @@ void game_update()
 
 	}
 
-	if (TRG(0) & PAD_START)
-	{
-		nextScene = SCENE_TITLE;
-	}
+	//if (TRG(0) & PAD_START)
+	//{
+	//	nextScene = SCENE_TITLE;
+	//}
 
 	
 
