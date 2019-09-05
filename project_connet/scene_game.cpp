@@ -345,11 +345,11 @@ void game_update()
 	case stage6end:
 		if (player.atk == 0)
 		{
-			game_state = 100;
+			game_state = 101;
 		}
 		else
 		{
-			game_state = 101;
+			game_state = 100;
 		}
 		break;
 
