@@ -700,7 +700,7 @@ void stage_0_draw()
 	}
 	if (player.timer / 64 % 2)
 	{
-		font::textOut(4, "Press Start(controller)/Enter(keyboard)", 500, 30, 1.0f, 1.0f, 1, 1, 1);
+		font::textOut(4, "Press Select(controller)/Back(keyboard)", 500, 30, 1.0f, 1.0f, 1, 1, 1);
 		font::textOut(4, "to skip tutorial", 500, 60, 1.0f, 1.0f, 1, 1, 1);
 	}
 }
