@@ -43,7 +43,7 @@ void game_init()
 
 	player.hp = 5;
 	player.guideState = 0;
-	//music::play(0, TRUE);
+	music::play(0, TRUE);
 
 	ending_timer = 0;
 }
@@ -90,9 +90,9 @@ void game_update()
 	case 99:
 
 		
-
+		ending_timer++;
 		
-		if (TRG(0) & PAD_START)
+		if (ending_timer >= 300)
 		{
 			nextScene = SCENE_TITLE;
 		}
@@ -109,7 +109,7 @@ void game_update()
 
 		sprite_load(&sprBg2, L"./Data/Images/ending.png");
 		
-		if (TRG(0) & PAD_START)
+		if (ending_timer >= 800)
 		{
 			nextScene = SCENE_TITLE;
 		}
@@ -138,7 +138,7 @@ void game_update()
 		//	}
 		//}
 
-		if (TRG(0) & PAD_START && ending_timer >= 800)
+		if (ending_timer >= 800)
 		{
 			nextScene = SCENE_TITLE;
 		}
